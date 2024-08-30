@@ -1,0 +1,15 @@
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\bin\Debug\net8.0\ChurchStore.Database.deps.json
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\bin\Debug\net8.0\ChurchStore.Database.dll
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\bin\Debug\net8.0\ChurchStore.Database.pdb
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\bin\Debug\net8.0\ChurchStore.Domain.dll
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\bin\Debug\net8.0\ChurchStore.Domain.pdb
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ChurchStore.Database.csproj.AssemblyReference.cache
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ChurchStore.Database.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ChurchStore.Database.AssemblyInfoInputs.cache
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ChurchStore.Database.AssemblyInfo.cs
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ChurchStore.Database.csproj.CoreCompileInputs.cache
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ChurchStore.Database.csproj.CopyComplete
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ChurchStore.Database.dll
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\refint\ChurchStore.Database.dll
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ChurchStore.Database.pdb
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ref\ChurchStore.Database.dll

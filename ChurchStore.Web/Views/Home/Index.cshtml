@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+
+
+
+<div id="produtos" class="containerProduto">
+</div>
+
+
+<script>
+    $(function () {
+        listarItens();
+    });
+    var listarItens = function() {
+        $.ajax({
+            url: "/Home/ListaProdutos",
+            method: "GET",
+        }).done(function (data) {
+            $("#produtos").html(data)
+        });
+    }
+
+</script>

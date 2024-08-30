@@ -1,0 +1,114 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <!-- Importação do jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body class="w-screen h-screen bg-slate-800">
+    <div class="w-screen h-screen flex items-center justify-center flex-col gap-2">
+        <div class="w-80 px-4 py-2 bg-yellow-100 border-4 border-yellow-100 border-l-yellow-400 rounded hidden" id="dvResultLogin">
+            <!--div de alertas-->
+        </div>
+        <form class="group relative flex flex-col gap-2">
+            <input type="email"
+                   id="email"
+                   name="email"
+                   class="w-80 focus:ring-blue-500 focus:outline-none text-sm placeholder-slate-400 rounded-md p-2 ring-1 ring-slate-200 shadow-sm bg-slate-700 text-white" placeholder="Email">
+            <input type="text"
+                   id="apelido"
+                   name="apelido"
+                   class="w-80 focus:ring-blue-500 focus:outline-none text-sm placeholder-slate-400 rounded-md p-2 ring-1 ring-slate-200 shadow-sm bg-slate-700 text-white" placeholder="Apelido">
+            <button type="button"
+                    id="btnRecuperarSenha"
+                    class="w-80 text-sm placeholder-slate-600 rounded-md p-2 shadow-sm bg-slate-600 text-white hover:bg-slate-700">
+                Solicitar nova senha
+            </button>
+            <a href="/Login">Login</a>
+        </form>
+    </div>
+    <script src="/js/crypto.js"></script>
+    <script>
+        $(function () {
+
+            $("#btnRecuperarSenha").click(function () {
+                recuperarSenha();
+            });
+
+        });
+
+        var recuperarSenha = function () {
+            var email = $("#email").val();
+            var apelido = $("#apelido").val();
+
+            if (email == undefined || email == '' || email.length < 10) {
+                $("#dvResultLogin").html("<div class='alert alert-sm alert-danger'>O campo [E-mail] é obrigatório, deve conter pelo menos 10 caracteres e ser um e-mail válido.</div>");
+                $("#dvResultLogin").removeClass("hidden");
+
+                return;
+            }
+
+
+            if (apelido == undefined || apelido == '') {
+                $("#dvResultLogin").html("<div class='alert alert-sm alert-danger'>O campo [Apelido] é obrigatório.</div>");
+                $("#dvResultLogin").removeClass("hidden");
+
+                return;
+            }
+
+            var login = {
+                Email: email,
+                Apelido: apelido,
+                ipOrigem: "",
+                appOrigem: ""
+            }
+            console.log(login)
+
+            $("#btnRecuperarSenha").prop("disabled", true);
+
+            $.ajax({
+                url: "/Login/RecuperaSenhaCliente",
+                async: true,
+                type: "POST",
+                data: login
+            }).done(function (result) {
+
+
+                $("#btnRecuperarSenha").prop("disabled", false);
+
+                if (result.success) {
+                    $("#dvResultLogin").removeClass("hidden");
+
+                    $("#dvResultLogin").html("<div class='alert alert-sm alert-success'>" + result.data + "</div>");
+
+                }
+                else {
+                    $("#dvResultLogin").removeClass("hidden");
+
+                    $("#dvResultLogin").html("<div class='alert alert-sm alert-danger'>" + result + "</div>");
+                }
+
+            }).fail(function (jqXHR, textStatus) {
+
+                $("#btnRecuperarSenha").prop("disabled", false);
+                $("#dvResultLogin").html("<div class='alert alert-sm alert-danger'>Ocorreu um erro ao tentar executar a operação. Tente mais tarde!</div>");
+            });
+        }
+    </script>
+</body>
+</html>

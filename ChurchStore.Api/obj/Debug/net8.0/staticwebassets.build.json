@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "mure7gYy2FwGDvqCgVrrnWNLNb6qgu93tB6GFkTCMCg=",
+  "Source": "ChurchStore.Api",
+  "BasePath": "_content/ChurchStore.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -1,0 +1,17 @@
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\bin\Debug\net8.0\ChurchStore.App.deps.json
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\bin\Debug\net8.0\ChurchStore.App.dll
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\bin\Debug\net8.0\ChurchStore.App.pdb
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\bin\Debug\net8.0\ChurchStore.Database.dll
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\bin\Debug\net8.0\ChurchStore.Domain.dll
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\bin\Debug\net8.0\ChurchStore.Database.pdb
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\bin\Debug\net8.0\ChurchStore.Domain.pdb
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\obj\Debug\net8.0\ChurchStore.App.csproj.AssemblyReference.cache
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\obj\Debug\net8.0\ChurchStore.App.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\obj\Debug\net8.0\ChurchStore.App.AssemblyInfoInputs.cache
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\obj\Debug\net8.0\ChurchStore.App.AssemblyInfo.cs
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\obj\Debug\net8.0\ChurchStore.App.csproj.CoreCompileInputs.cache
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\obj\Debug\net8.0\ChurchStore.App.csproj.CopyComplete
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\obj\Debug\net8.0\ChurchStore.App.dll
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\obj\Debug\net8.0\refint\ChurchStore.App.dll
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\obj\Debug\net8.0\ChurchStore.App.pdb
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\obj\Debug\net8.0\ref\ChurchStore.App.dll

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ChurchStore.Domain.Produto>
+
+@{
+    Layout = null;
+}
+
+@foreach(var item in Model)
+{
+    <div class="produto">
+        <div class="containerImg">
+            <img src='@item.ImagemUrl' alt="" />
+        </div>
+        <div class="containerDados">
+            <div class="informacoes">
+                <h1 class="nome">
+                    @item.ProdutoNome
+                </h1>
+                <div class="valor">
+                    @item.ProdutoValor.ToString("C2")
+                </div>
+                <div class="quantidade">
+                    Quantidade disponível @item.Quantidade
+                </div>
+            </div>
+            <div class="reservas">
+                <div class="reservasFlex">
+                    <div class="unidades">
+                        <div onClick={SubtrairQuantidade} class="w-8 lg:w-9 h-8 lg:h-9  rounded-lg flex items-center justify-center  bg-primary text-zinc-50 cursor-pointer">
+                            -
+                        </div>
+                        <div class="w-8 lg:w-9 h-8 lg:h-9 rounded-lg flex items-center justify-center bg-primary text-zinc-50">
+                            @item.Quantidade
+                        </div>
+                        <div onClick={AdicionarQuantidade} class="w-8 lg:w-9 h-8 lg:h-9 rounded-lg flex items-center justify-center  bg-primary text-zinc-50 cursor-pointer">
+                            +
+                        </div>
+                    </div>
+                    <div onClick={AdicionarNaSacola} class="h-8 lg:h-9 px-3 lg:px-6 lg:text-base font-semibold rounded-md flex items-center justify-center   bg-primary text-zinc-50 cursor-pointer">
+                        Reservar
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
