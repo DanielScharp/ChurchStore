@@ -203,7 +203,7 @@ namespace ChurchStore.Database.Repositorios
         }
 
 
-        private async Task<int> AdicionarPedido(int clienteId)
+        public async Task<int> AdicionarPedido(int clienteId)
         {
             try
             {
@@ -238,52 +238,11 @@ namespace ChurchStore.Database.Repositorios
             }
         }
 
-        public async Task<int> AdicionarItemAoPedido(int clienteId, int produtoId, int quantidade)
-        {
-            try
-            {
-                int pedidoId = await RetornaIdPedidoAberto(clienteId);
-
-                int estoqueProduto = await RetornaQuantidadeProduto(produtoId);
-
-                int estoqueRestante = estoqueProduto - quantidade;
-
-                AlterarQuantidadeEstoque(produtoId, estoqueRestante);
-
-                if(pedidoId > 0)
-                {
-                    PedidoItem verificaSeProdutoJaEstaNoPedido = await VerificaSeProdutoJaEstaNoPedido(pedidoId, produtoId);
-                    var alteraQuantidade = verificaSeProdutoJaEstaNoPedido.Quantidade;
-                    quantidade = alteraQuantidade + quantidade;
-                    if (verificaSeProdutoJaEstaNoPedido.ProdutoId > 0)
-                    {
-                        AlterarQuantidadeItensPedido(pedidoId, produtoId, quantidade);
-                    }
-                    else
-                    {
-                        InserirPedidoItem(pedidoId,clienteId,produtoId,quantidade);
-                    }
-                }
-                else
-                {
-                    pedidoId = await AdicionarPedido(clienteId);
-
-                    InserirPedidoItem(pedidoId, clienteId, produtoId, quantidade);
-                }
-
-                return estoqueRestante;
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
         public async Task<bool> RemoverItemDoPedido(int clienteId, int produtoId, int pedidoId)
         {
             try
             {
-                int qtdAtualProduto = await RetornaQuantidadeProduto(produtoId);
+                int qtdAtualProduto = await RetornaQuantidadeProdutoNoEstoque(produtoId);
                 int qtdProdutosRetorno = await RetornaQuantidadeProdutoPorCliente(clienteId, produtoId, pedidoId);
                 int quantidadeTotalProduto = qtdAtualProduto + qtdProdutosRetorno;
                 AlterarQuantidadeEstoque(produtoId, quantidadeTotalProduto);
@@ -334,7 +293,7 @@ namespace ChurchStore.Database.Repositorios
             }
         }
 
-        private async Task<int> RetornaIdPedidoAberto(int clienteId)
+        public async Task<int> RetornaIdPedidoAberto(int clienteId)
         {
             try
             {
@@ -365,7 +324,7 @@ namespace ChurchStore.Database.Repositorios
                 throw;
             }
         }
-        private async Task<int> RetornaQuantidadeProduto(int produtoId)
+        public async Task<int> RetornaQuantidadeProdutoNoEstoque(int produtoId)
         {
             try
             {
@@ -396,7 +355,7 @@ namespace ChurchStore.Database.Repositorios
             }
         }
 
-        private async Task<PedidoItem> VerificaSeProdutoJaEstaNoPedido(int pedidoId, int produtoId)
+        public async Task<PedidoItem> VerificaSeProdutoJaEstaNoPedido(int pedidoId, int produtoId)
         {
             try
             {
@@ -430,7 +389,7 @@ namespace ChurchStore.Database.Repositorios
             }
         }
 
-        private async Task<int> RetornaQuantidadeProdutoPorCliente(int clienteId,int produtoId, int pedidoId)
+        public async Task<int> RetornaQuantidadeProdutoPorCliente(int clienteId,int produtoId, int pedidoId)
         {
             try
             {
@@ -462,7 +421,7 @@ namespace ChurchStore.Database.Repositorios
             }
         }
 
-        private async void AlterarQuantidadeEstoque(int produtoId, int quantidade)
+        public async void AlterarQuantidadeEstoque(int produtoId, int quantidade)
         {
             try
             {
@@ -486,7 +445,7 @@ namespace ChurchStore.Database.Repositorios
                 throw;
             }
         }
-        private async void InserirPedidoItem(int pedidoId, int clienteId, int produtoId, int quantidade)
+        public async void InserirPedidoItem(int pedidoId, int clienteId, int produtoId, int quantidade)
         {
             try
             {
@@ -510,8 +469,8 @@ namespace ChurchStore.Database.Repositorios
                 throw;
             }
         }
-        
-        private async void AlterarQuantidadeItensPedido(int pedidoId, int produtoId, int quantidade)
+
+        public async void AlterarQuantidadeItensPedido(int pedidoId, int produtoId, int quantidade)
         {
             try
             {

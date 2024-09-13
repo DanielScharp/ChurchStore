@@ -26,11 +26,11 @@ namespace ChurchStore.Database.Repositorios
                     await conn.OpenAsync();
 
                     var sql = new StringBuilder();
-                    sql.Append(" SELECT * FROM helpdesk.usuarios ");
-                    sql.AppendFormat(" where apelido = '{0}' ", apelido);
+                    sql.Append(" SELECT * FROM church_store.usuarios ");
+                    sql.AppendFormat(" where login = '{0}' ", apelido);
                     if (!String.IsNullOrEmpty(senha))
                     {
-                        sql.AppendFormat(" and senha = MD5('{0}') ", senha);
+                        sql.AppendFormat(" and Senha = MD5('{0}') ", senha);
                     }
 
                     using MySqlCommand command = new(sql.ToString(), conn);
@@ -44,7 +44,7 @@ namespace ChurchStore.Database.Repositorios
 
                         usuario.UsuarioId = reader.GetInt32(reader.GetOrdinal("usuarioId"));
                         usuario.Nome = reader[reader.GetOrdinal("nome")].ToString();
-                        usuario.Apelido = reader[reader.GetOrdinal("apelido")].ToString();
+                        usuario.Apelido = reader[reader.GetOrdinal("login")].ToString();
                     }
 
                     return usuario;
@@ -65,7 +65,7 @@ namespace ChurchStore.Database.Repositorios
                     await conn.OpenAsync();
 
                     var sql = new StringBuilder();
-                    sql.Append(" SELECT * FROM helpdesk.usuarios ");
+                    sql.Append(" SELECT * FROM church_store.usuarios ");
                     sql.AppendFormat(" where apelido = '{0}' ", apelido);
                     sql.AppendFormat(" and email = '{0}' ", email);
 

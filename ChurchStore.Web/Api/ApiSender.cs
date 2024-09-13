@@ -70,7 +70,8 @@ namespace ChurchStore.Web.Api
                 throw;
             }
         }
-        //-----------------------------------------Usuarios-----------------------------------------
+        //-----------------------------------------FIM Usuarios-----------------------------------------
+        //-----------------------------------------Produtos-----------------------------------------
         public async Task<ApiResponse> ListarProdutos()
         {
 
@@ -96,5 +97,62 @@ namespace ChurchStore.Web.Api
             }
 
         }
+        //-----------------------------------------Fim Produtos-----------------------------------------
+        //-----------------------------------------BAG-----------------------------------------
+        public async Task<ApiResponse> ListarProdutosBag(int clienteId)
+        {
+
+            try
+            {
+                var parameters = new Dictionary<string, string>
+                {
+                    {"clienteId", clienteId.ToString()},
+                };
+
+                var request = new ApiRequest
+                {
+                    RouteValue = "Pedidos/itens/Listar",
+                    Content = parameters,
+                };
+
+                return await _apiService.GetAsync(request);
+
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
+        //-----------------------------------------Fim BAG-----------------------------------------
+        //-----------------------------------------Pedidos-----------------------------------------
+        public async Task<ApiResponse> AdicionarItensNaSacola(int clienteId, int produtoId, int quantidade)
+        {
+
+            try
+            {
+                var parameters = new Dictionary<string, string>
+                {
+                    {"clienteId", clienteId.ToString()},
+                    {"produtoId", produtoId.ToString()},
+                    {"quantidade", quantidade.ToString()},
+                };
+
+                var request = new ApiRequest
+                {
+                    RouteValue = "Pedidos/itens/adicionar",
+                    Content = parameters,
+                };
+
+                return await _apiService.PostAsync(request);
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
+        //-----------------------------------------FimPedidos-----------------------------------------
+
     }
 }

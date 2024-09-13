@@ -58,14 +58,43 @@ namespace ChurchStore.App
         {
             try
             {
-                return await _pedidosRepositorio.AdicionarItemAoPedido( clienteId, produtoId, quantidade);
-                 
+                int pedidoId = await _pedidosRepositorio.RetornaIdPedidoAberto(clienteId);
+
+                int estoqueProduto = await _pedidosRepositorio.RetornaQuantidadeProdutoNoEstoque(produtoId);
+
+                int estoqueRestante = estoqueProduto - quantidade;
+
+                _pedidosRepositorio.AlterarQuantidadeEstoque(produtoId, estoqueRestante);
+
+                if (pedidoId > 0)
+                {
+                    PedidoItem verificaSeProdutoJaEstaNoPedido = await _pedidosRepositorio.VerificaSeProdutoJaEstaNoPedido(pedidoId, produtoId);
+                    var alteraQuantidade = verificaSeProdutoJaEstaNoPedido.Quantidade;
+                    quantidade = alteraQuantidade + quantidade;
+                    if (verificaSeProdutoJaEstaNoPedido.ProdutoId > 0)
+                    {
+                        _pedidosRepositorio.AlterarQuantidadeItensPedido(pedidoId, produtoId, quantidade);
+                    }
+                    else
+                    {
+                        _pedidosRepositorio.InserirPedidoItem(pedidoId, clienteId, produtoId, quantidade);
+                    }
+                }
+                else
+                {
+                    pedidoId = await _pedidosRepositorio.AdicionarPedido(clienteId);
+
+                    _pedidosRepositorio.InserirPedidoItem(pedidoId, clienteId, produtoId, quantidade);
+                }
+
+                return estoqueRestante;
             }
             catch
             {
                 throw;
             }
         }
+
         public async Task<bool> RemoverItemDoPedido(int clienteId, int produtoId, int pedidoId)
         {
             try

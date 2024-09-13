@@ -32,7 +32,7 @@ namespace ChurchStore.Api.Services
             {
                 client.Connect("smtp.gmail.com", 465, true); //465 é a porta do seu servidor de email
 
-                client.Authenticate(emailRemetente, "jdoc owip hzfl zkwy");
+                client.Authenticate(emailRemetente, "");
 
                 client.Send(message);
 

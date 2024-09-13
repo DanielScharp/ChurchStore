@@ -1,10 +1,12 @@
-﻿using ChurchStore.App;
+﻿using ChurchStore.Api;
+using ChurchStore.App;
+using ChurchStore.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChurchStore.API.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PedidosController : ControllerBase
     {
@@ -22,7 +24,7 @@ namespace ChurchStore.API.Controllers
             try
             {
                 var listaUsuarios = await _pedidosApplication.Listar();
-                return Ok(listaUsuarios);
+                return Ok(ResultMessage.Sucesso(0, listaUsuarios));
             }
             catch (Exception ex)
             {
@@ -38,7 +40,7 @@ namespace ChurchStore.API.Controllers
             try
             {
                 var listaUsuarios = await _pedidosApplication.ListarItensPorCliente(clienteId);
-                return Ok(listaUsuarios);
+                return Ok(ResultMessage.Sucesso(0, listaUsuarios));
             }
             catch (Exception ex)
             {
@@ -65,17 +67,16 @@ namespace ChurchStore.API.Controllers
 
         [Route("itens/adicionar")]
         [HttpPost]
-        public async Task<IActionResult> AdicionarItemAoPedido(int clienteId, int produtoId, int quantidade)
+        public async Task<IActionResult> AdicionarItemAoPedido([FromBody] AdicionarItemPedidoRequest request)
         {
             try
             {
-                var listaUsuarios = await _pedidosApplication.AdicionarItemAoPedido(clienteId, produtoId, quantidade);
-                return Ok(listaUsuarios);
+                var quantidadeRestanteEstoque = await _pedidosApplication.AdicionarItemAoPedido(request.ClienteId, request.ProdutoId, request.Quantidade);
+                return Ok(new {Success = true, Data= quantidadeRestanteEstoque });
             }
             catch (Exception ex)
             {
                 throw ex;
-
             }
         }
 

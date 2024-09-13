@@ -52,6 +52,7 @@ C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Api\obj\Debu
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Api\obj\Debug\net8.0\ChurchStore.Api.csproj.CoreCompileInputs.cache
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Api\obj\Debug\net8.0\ChurchStore.Api.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Api\obj\Debug\net8.0\ChurchStore.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Api\obj\Debug\net8.0\ChurchStore.Api.sourcelink.json
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Api\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Api\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Api\obj\Debug\net8.0\staticwebassets\msbuild.ChurchStore.Api.Microsoft.AspNetCore.StaticWebAssets.props

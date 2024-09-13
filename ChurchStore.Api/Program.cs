@@ -14,6 +14,7 @@ string connectionString = configuration.GetConnectionString("MySqlConnection");
 // Criando instâncias de UsuarioRepositorio      
 var usuariosRepositorio = new UsuariosRepositorio(connectionString);
 var produtosRepositorio = new ProdutosRepositorio(connectionString);
+var pedidosRepositorio = new PedidosRepositorio(connectionString);
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
@@ -21,12 +22,14 @@ builder.Services.AddHttpClient();
 // Adicionando as instâncias ao contêiner de serviços
 builder.Services.AddSingleton(usuariosRepositorio);
 builder.Services.AddSingleton(produtosRepositorio);
+builder.Services.AddSingleton(pedidosRepositorio);
 
 builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<MailSender>();
 
 builder.Services.AddScoped<UsuariosApplication>();
 builder.Services.AddScoped<ProdutosApplication>();
+builder.Services.AddScoped<PedidosApplication>();
 
 
 

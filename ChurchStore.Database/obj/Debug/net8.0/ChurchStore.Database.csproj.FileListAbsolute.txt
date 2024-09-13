@@ -8,6 +8,7 @@ C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ChurchStore.Database.AssemblyInfoInputs.cache
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ChurchStore.Database.AssemblyInfo.cs
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ChurchStore.Database.csproj.CoreCompileInputs.cache
+C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ChurchStore.Database.sourcelink.json
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ChurchStore.Database.csproj.CopyComplete
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\ChurchStore.Database.dll
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Database\obj\Debug\net8.0\refint\ChurchStore.Database.dll

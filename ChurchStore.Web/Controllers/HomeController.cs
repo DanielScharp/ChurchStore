@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Text;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ChurchStore.Web.Controllers
@@ -47,6 +48,38 @@ namespace ChurchStore.Web.Controllers
                 {
                     return Json(new { success = false, message = result.Message });
                 }
+
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AdicionarItensNaSacola([FromBody] List<Produto> produtos)
+        {
+            try
+            {
+
+                var clienteId = ClienteSessao.Logado.UsuarioId;
+                var mensagemRetorno = new StringBuilder();
+                mensagemRetorno.Append(" <span>Os produtos foram adicionados ao carrinho!</span><br />");
+
+                foreach (Produto produto in produtos)
+                {
+                    var result = await _apiSender.AdicionarItensNaSacola(clienteId, produto.ProdutoId, produto.Quantidade);
+                    if (!result.Success)
+                    {
+                        mensagemRetorno.AppendFormat(" <span>Houve um erro!</span><br />");
+                    }
+
+                    var quantidadeRestanteEstoque = JsonConvert.DeserializeObject<int>(result.Data.ToString());
+
+                }
+
+                return Json(new { success = true, data = mensagemRetorno });
 
 
             }
