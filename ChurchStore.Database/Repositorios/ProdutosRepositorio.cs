@@ -82,9 +82,9 @@ namespace ChurchStore.Database.Repositorios
                     {
                         var produto = new Produto();
 
-                        produto.ProdutoId = reader.GetInt32(reader.GetOrdinal("ProdutoId"));
-                        produto.ProdutoNome = reader[reader.GetOrdinal("ProdutoNome")].ToString();
-                        produto.ProdutoValor = reader[reader.GetOrdinal("ProdutoValor")] != DBNull.Value ? reader.GetDouble(reader.GetOrdinal("ProdutoValor")) : 0;
+                        produto.ProdutoId = reader.GetInt32(reader.GetOrdinal("Id"));
+                        produto.ProdutoNome = reader[reader.GetOrdinal("Nome")].ToString();
+                        produto.ProdutoValor = reader[reader.GetOrdinal("Valor")] != DBNull.Value ? reader.GetDouble(reader.GetOrdinal("Valor")) : 0;
                         produto.Quantidade = reader.GetInt32(reader.GetOrdinal("Quantidade"));
                         produto.ImagemUrl = reader[reader.GetOrdinal("ImagemUrl")].ToString();
                         produto.Exibir = reader[reader.GetOrdinal("Exibir")] != DBNull.Value ? reader.GetBoolean(reader.GetOrdinal("Exibir")) : false;
@@ -114,7 +114,7 @@ namespace ChurchStore.Database.Repositorios
 
                     var sql = new StringBuilder();
                     sql.Append(" INSERT INTO produtos ");
-                    sql.Append(" (`ProdutoNome`, `ProdutoValor`, `Quantidade`, `ImagemUrl`) ");
+                    sql.Append(" (`Nome`, `Valor`, `Quantidade`, `ImagemUrl`) ");
                     sql.Append(" VALUES ");
                     sql.AppendFormat(" ('{0}', '{1}', '{2}', '{3}'); ", produto.ProdutoNome, produto.ProdutoValor, produto.Quantidade, produto.ImagemUrl);
 
@@ -144,10 +144,10 @@ namespace ChurchStore.Database.Repositorios
 
                     var sql = new StringBuilder();
                     sql.Append(" UPDATE produtos SET ");
-                    sql.AppendFormat(" ProdutoNome = '{0}', ProdutoValor = '{1}', Quantidade = '{2}', ImagemUrl = '{3}', Exibir = {4}  ",
+                    sql.AppendFormat(" Nome = '{0}', Valor = '{1}', Quantidade = '{2}', ImagemUrl = '{3}', Exibir = {4}  ",
                         produto.ProdutoNome, produto.ProdutoValor, produto.Quantidade, produto.ImagemUrl, produto.Exibir
                     );
-                    sql.AppendFormat(" WHERE(ProdutoId = '{0}');", produto.ProdutoId);
+                    sql.AppendFormat(" WHERE(Id = '{0}');", produto.ProdutoId);
 
                     using MySqlCommand command = new(sql.ToString(), conn);
 

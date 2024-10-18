@@ -1,0 +1,210 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5C725110-D045-405F-A599-A257D7A89F5D}|ChurchStore.Api\\ChurchStore.Api.csproj|c:\\users\\daniel.scharp\\desktop\\churchstore\\churchstore.api\\key.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C725110-D045-405F-A599-A257D7A89F5D}|ChurchStore.Api\\ChurchStore.Api.csproj|solutionrelative:churchstore.api\\key.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C725110-D045-405F-A599-A257D7A89F5D}|ChurchStore.Api\\ChurchStore.Api.csproj|c:\\users\\daniel.scharp\\desktop\\churchstore\\churchstore.api\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C725110-D045-405F-A599-A257D7A89F5D}|ChurchStore.Api\\ChurchStore.Api.csproj|solutionrelative:churchstore.api\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9908941-8C82-480B-B78C-C8C23754CEFA}|ChurchStore.App\\ChurchStore.App.csproj|c:\\users\\daniel.scharp\\desktop\\churchstore\\churchstore.app\\pedidosapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9908941-8C82-480B-B78C-C8C23754CEFA}|ChurchStore.App\\ChurchStore.App.csproj|solutionrelative:churchstore.app\\pedidosapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43DF06AF-40FD-4401-9F5D-13EBA6722A34}|ChurchStore.Database\\ChurchStore.Database.csproj|c:\\users\\daniel.scharp\\desktop\\churchstore\\churchstore.database\\repositorios\\produtosrepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43DF06AF-40FD-4401-9F5D-13EBA6722A34}|ChurchStore.Database\\ChurchStore.Database.csproj|solutionrelative:churchstore.database\\repositorios\\produtosrepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43DF06AF-40FD-4401-9F5D-13EBA6722A34}|ChurchStore.Database\\ChurchStore.Database.csproj|c:\\users\\daniel.scharp\\desktop\\churchstore\\churchstore.database\\repositorios\\pedidosrepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43DF06AF-40FD-4401-9F5D-13EBA6722A34}|ChurchStore.Database\\ChurchStore.Database.csproj|solutionrelative:churchstore.database\\repositorios\\pedidosrepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C725110-D045-405F-A599-A257D7A89F5D}|ChurchStore.Api\\ChurchStore.Api.csproj|c:\\users\\daniel.scharp\\desktop\\churchstore\\churchstore.api\\controllers\\pedidoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C725110-D045-405F-A599-A257D7A89F5D}|ChurchStore.Api\\ChurchStore.Api.csproj|solutionrelative:churchstore.api\\controllers\\pedidoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E38D2AB9-929E-47E2-A754-1BC0C0CFF5DB}|ChurchStore.Web\\ChurchStore.Web.csproj|c:\\users\\daniel.scharp\\desktop\\churchstore\\churchstore.web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E38D2AB9-929E-47E2-A754-1BC0C0CFF5DB}|ChurchStore.Web\\ChurchStore.Web.csproj|solutionrelative:churchstore.web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E38D2AB9-929E-47E2-A754-1BC0C0CFF5DB}|ChurchStore.Web\\ChurchStore.Web.csproj|c:\\users\\daniel.scharp\\desktop\\churchstore\\churchstore.web\\models\\clientesessao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E38D2AB9-929E-47E2-A754-1BC0C0CFF5DB}|ChurchStore.Web\\ChurchStore.Web.csproj|solutionrelative:churchstore.web\\models\\clientesessao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E38D2AB9-929E-47E2-A754-1BC0C0CFF5DB}|ChurchStore.Web\\ChurchStore.Web.csproj|c:\\users\\daniel.scharp\\desktop\\churchstore\\churchstore.web\\controllers\\bagcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E38D2AB9-929E-47E2-A754-1BC0C0CFF5DB}|ChurchStore.Web\\ChurchStore.Web.csproj|solutionrelative:churchstore.web\\controllers\\bagcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32A655D9-44CB-4A69-A42D-CD53C6435F26}|ChurchStore.Domain\\ChurchStore.Domain.csproj|c:\\users\\daniel.scharp\\desktop\\churchstore\\churchstore.domain\\pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32A655D9-44CB-4A69-A42D-CD53C6435F26}|ChurchStore.Domain\\ChurchStore.Domain.csproj|solutionrelative:churchstore.domain\\pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 257,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 237,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Api\\Services\\EmailService.cs",
+              "RelativeDocumentMoniker": "ChurchStore.Api\\Services\\EmailService.cs",
+              "ToolTip": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Api\\Services\\EmailService.cs",
+              "RelativeToolTip": "ChurchStore.Api\\Services\\EmailService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T20:27:49.919Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Key.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Api\\Key.cs",
+              "RelativeDocumentMoniker": "ChurchStore.Api\\Key.cs",
+              "ToolTip": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Api\\Key.cs",
+              "RelativeToolTip": "ChurchStore.Api\\Key.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T20:26:10.572Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProdutosRepositorio.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Database\\Repositorios\\ProdutosRepositorio.cs",
+              "RelativeDocumentMoniker": "ChurchStore.Database\\Repositorios\\ProdutosRepositorio.cs",
+              "ToolTip": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Database\\Repositorios\\ProdutosRepositorio.cs",
+              "RelativeToolTip": "ChurchStore.Database\\Repositorios\\ProdutosRepositorio.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAYwDsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T20:08:51.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PedidosRepositorio.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Database\\Repositorios\\PedidosRepositorio.cs",
+              "RelativeDocumentMoniker": "ChurchStore.Database\\Repositorios\\PedidosRepositorio.cs",
+              "ToolTip": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Database\\Repositorios\\PedidosRepositorio.cs",
+              "RelativeToolTip": "ChurchStore.Database\\Repositorios\\PedidosRepositorio.cs",
+              "ViewState": "AgIAAKUBAAAAAAAAAAAYwNIBAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T16:09:27.8Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ClienteSessao.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Web\\Models\\ClienteSessao.cs",
+              "RelativeDocumentMoniker": "ChurchStore.Web\\Models\\ClienteSessao.cs",
+              "ToolTip": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Web\\Models\\ClienteSessao.cs",
+              "RelativeToolTip": "ChurchStore.Web\\Models\\ClienteSessao.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T15:53:46.772Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Web\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "ChurchStore.Web\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Web\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "ChurchStore.Web\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAA4AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T14:24:46.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Pedido.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Domain\\Pedido.cs",
+              "RelativeDocumentMoniker": "ChurchStore.Domain\\Pedido.cs",
+              "ToolTip": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Domain\\Pedido.cs",
+              "RelativeToolTip": "ChurchStore.Domain\\Pedido.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAywCoAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T20:18:06.46Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BagController.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Web\\Controllers\\BagController.cs",
+              "RelativeDocumentMoniker": "ChurchStore.Web\\Controllers\\BagController.cs",
+              "ToolTip": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Web\\Controllers\\BagController.cs",
+              "RelativeToolTip": "ChurchStore.Web\\Controllers\\BagController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCYAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T20:02:12.284Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PedidosApp.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.App\\PedidosApp.cs",
+              "RelativeDocumentMoniker": "ChurchStore.App\\PedidosApp.cs",
+              "ToolTip": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.App\\PedidosApp.cs",
+              "RelativeToolTip": "ChurchStore.App\\PedidosApp.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAYwFgAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-14T15:48:20.929Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PedidosController.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Api\\Controllers\\PedidosController.cs",
+              "RelativeDocumentMoniker": "ChurchStore.Api\\Controllers\\PedidosController.cs",
+              "ToolTip": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Api\\Controllers\\PedidosController.cs",
+              "RelativeToolTip": "ChurchStore.Api\\Controllers\\PedidosController.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAwwFYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T16:56:00.333Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

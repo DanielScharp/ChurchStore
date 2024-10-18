@@ -2,11 +2,13 @@
 using ChurchStore.Web.Api;
 using ChurchStore.Web.Models;
 using ChurchStore.Web.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace ChurchStore.Web.Controllers
 {
+    [Authorize]
     public class BagController : Controller
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -18,24 +20,40 @@ namespace ChurchStore.Web.Controllers
             _apiSender = new ApiSender(apiService);
 
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
-
-        public async Task<IActionResult> ListaProdutosBag()
-        {
-
             try
             {
                 var clienteId = ClienteSessao.Logado.UsuarioId;
 
                 var result = await _apiSender.ListarProdutosBag(clienteId);
 
+                List<PedidoItem> listaProdutos = new List<PedidoItem>();
                 if (result.Success)
                 {
-                    var listaProdutos = JsonConvert.DeserializeObject<List<PedidoItem>>(result.Data.ToString());
-                    return View("_ListarProdutosBag", listaProdutos);
+                    listaProdutos = JsonConvert.DeserializeObject<List<PedidoItem>>(result.Data.ToString());
+                }
+                return View(listaProdutos);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        public async Task<IActionResult> RemoverProdutosBag(int produtoId, int pedidoId)
+        {
+
+            try
+            {
+                var clienteId = ClienteSessao.Logado.UsuarioId;
+
+                var result = await _apiSender.RemoverProdutosBag(clienteId, produtoId, pedidoId);
+
+                if (result.Success)
+                {
+                    return Json(new { success = true, message = "O produto foi removido do carrinho com sucesso!" });
                 }
                 else
                 {

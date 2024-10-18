@@ -10,3 +10,15 @@ C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Domain\obj\D
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Domain\obj\Debug\net8.0\refint\ChurchStore.Domain.dll
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Domain\obj\Debug\net8.0\ChurchStore.Domain.pdb
 C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Domain\obj\Debug\net8.0\ref\ChurchStore.Domain.dll
+C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.Domain\bin\Debug\net8.0\ChurchStore.Domain.deps.json
+C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.Domain\bin\Debug\net8.0\ChurchStore.Domain.dll
+C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.Domain\bin\Debug\net8.0\ChurchStore.Domain.pdb
+C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.Domain\obj\Debug\net8.0\ChurchStore.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.Domain\obj\Debug\net8.0\ChurchStore.Domain.AssemblyInfoInputs.cache
+C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.Domain\obj\Debug\net8.0\ChurchStore.Domain.AssemblyInfo.cs
+C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.Domain\obj\Debug\net8.0\ChurchStore.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.Domain\obj\Debug\net8.0\ChurchStore.Domain.sourcelink.json
+C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.Domain\obj\Debug\net8.0\ChurchStore.Domain.dll
+C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.Domain\obj\Debug\net8.0\refint\ChurchStore.Domain.dll
+C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.Domain\obj\Debug\net8.0\ChurchStore.Domain.pdb
+C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.Domain\obj\Debug\net8.0\ref\ChurchStore.Domain.dll

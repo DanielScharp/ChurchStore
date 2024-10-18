@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jIbDvh09CM6hy1Y72ZK5E5/tq90CoTl0ZrMEtwRe6TiUhKdJRzcUYdNf+TbAbeNKZvuTf9pIrVmmL2tmYV2zMA==",
+  "dgSpecHash": "7s7i1ZNN9u4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Daniel.scharp\\Desktop\\Repositorios\\ChurchStore\\ChurchStore.Api\\ChurchStore.Api.csproj",
+  "projectFilePath": "C:\\Users\\Daniel.scharp\\Desktop\\ChurchStore\\ChurchStore.Api\\ChurchStore.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Daniel.scharp\\.nuget\\packages\\bouncycastle.cryptography\\2.4.0\\bouncycastle.cryptography.2.4.0.nupkg.sha512",
     "C:\\Users\\Daniel.scharp\\.nuget\\packages\\google.protobuf\\3.26.1\\google.protobuf.3.26.1.nupkg.sha512",

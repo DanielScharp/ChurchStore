@@ -28,7 +28,7 @@ namespace ChurchStore.Database.Repositorios
                     var sql = new StringBuilder();
                     sql.Append(" SELECT t1.*, t2.Status, T3.* ");
                     sql.Append(" FROM pedidos t1");
-                    sql.Append(" LEFT JOIN pedidos_status t2 ON t2.StatusId = t1.StatusId ");
+                    sql.Append(" LEFT JOIN pedidos_status t2 ON t2.Id = t1.StatusId ");
                     sql.Append(" LEFT JOIN clientes t3 ON t3.ClienteId = t1.ClienteId ");
 
                     using MySqlCommand command = new(sql.ToString(), conn);
@@ -72,7 +72,7 @@ namespace ChurchStore.Database.Repositorios
                     var sql = new StringBuilder();
                     sql.Append(" SELECT t1.*, t2.Status, t3.* ");
                     sql.Append(" FROM pedidos t1");
-                    sql.Append(" LEFT JOIN pedidos_status t2 ON t2.StatusId = t1.StatusId ");
+                    sql.Append(" LEFT JOIN pedidos_status t2 ON t2.Id = t1.StatusId ");
                     sql.Append(" LEFT JOIN usuarios t3 ON t3.UsuarioId = t1.ClienteId ");
 
                     using MySqlCommand command = new(sql.ToString(), conn);
@@ -114,10 +114,10 @@ namespace ChurchStore.Database.Repositorios
                     await conn.OpenAsync();
 
                     var sql = new StringBuilder();
-                    sql.Append(" SELECT t1.ProdutoId, t1.ClienteId, t1.PedidoId, SUM(t1.Quantidade) as 'Quantidade', SUM(t1.Quantidade * t2.ProdutoValor) as 'Total', ");
-                    sql.Append(" t2.ProdutoNome, t2.ProdutoValor, t2.ImagemUrl, t3.Nome ");
+                    sql.Append(" SELECT t1.ProdutoId, t1.ClienteId, t1.PedidoId, SUM(t1.Quantidade) as 'Quantidade', SUM(t1.Quantidade * t2.Valor) as 'Total', ");
+                    sql.Append(" t2.Nome, t2.Valor, t2.ImagemUrl, t3.Nome ");
                     sql.Append(" FROM pedidos_itens t1 ");
-                    sql.Append(" left join produtos t2 on t2.ProdutoId = t1.ProdutoId ");
+                    sql.Append(" left join produtos t2 on t2.Id = t1.ProdutoId ");
                     sql.Append(" LEFT JOIN usuarios t3 ON t3.UsuarioId = t1.ClienteId ");
                     sql.AppendFormat(" where t1.ClienteId ='{0}' ", clienteId);
                     sql.Append(" GROUP BY t1.PedidoId, t1.ProdutoId");
@@ -137,9 +137,9 @@ namespace ChurchStore.Database.Repositorios
                         pedido.ClienteId = reader.GetInt32(reader.GetOrdinal("ClienteId"));
                         pedido.ClienteNome = reader[reader.GetOrdinal("Nome")].ToString();
                         pedido.Quantidade = reader.GetInt32(reader.GetOrdinal("Quantidade"));
-                        pedido.ProdutoNome = reader[reader.GetOrdinal("ProdutoNome")].ToString();
+                        pedido.ProdutoNome = reader[reader.GetOrdinal("Nome")].ToString();
                         pedido.ImagemUrl = reader[reader.GetOrdinal("ImagemUrl")].ToString();
-                        pedido.ProdutoValor = reader[reader.GetOrdinal("ProdutoValor")] != DBNull.Value ? reader.GetDouble(reader.GetOrdinal("ProdutoValor")) : 0;
+                        pedido.ProdutoValor = reader[reader.GetOrdinal("Valor")] != DBNull.Value ? reader.GetDouble(reader.GetOrdinal("Valor")) : 0;
                         pedido.Total = reader[reader.GetOrdinal("Total")] != DBNull.Value ? reader.GetDouble(reader.GetOrdinal("Total")) : 0;
 
                         pedidos.Add(pedido);
@@ -164,9 +164,9 @@ namespace ChurchStore.Database.Repositorios
 
                     var sql = new StringBuilder();
                     sql.Append(" SELECT t1.ProdutoId, t1.ClienteId, t1.PedidoId,t1.Quantidade, ");
-                    sql.Append(" t2.ProdutoNome, t2.ProdutoValor, t2.ImagemUrl, t3.Nome ");
+                    sql.Append(" t2.Nome AS 'ProdutoNome', t2.Valor, t2.ImagemUrl, t3.Nome ");
                     sql.Append(" FROM pedidos_itens t1 ");
-                    sql.Append(" left join produtos t2 on t2.ProdutoId = t1.ProdutoId ");
+                    sql.Append(" left join produtos t2 on t2.Id = t1.ProdutoId ");
                     sql.Append(" LEFT JOIN usuarios t3 ON t3.UsuarioId = t1.ClienteId ");
                     sql.AppendFormat(" where t1.PedidoId ='{0}' ", pedidoId);
 
@@ -187,7 +187,7 @@ namespace ChurchStore.Database.Repositorios
                         pedido.Quantidade = reader.GetInt32(reader.GetOrdinal("Quantidade"));
                         pedido.ProdutoNome = reader[reader.GetOrdinal("ProdutoNome")].ToString();
                         pedido.ImagemUrl = reader[reader.GetOrdinal("ImagemUrl")].ToString();
-                        pedido.ProdutoValor = reader[reader.GetOrdinal("ProdutoValor")] != DBNull.Value ? reader.GetDouble(reader.GetOrdinal("ProdutoValor")) : 0;
+                        pedido.ProdutoValor = reader[reader.GetOrdinal("Valor")] != DBNull.Value ? reader.GetDouble(reader.GetOrdinal("Valor")) : 0;
                         pedido.Total = pedido.ProdutoValor * pedido.Quantidade;
 
                         pedidos.Add(pedido);
@@ -215,7 +215,7 @@ namespace ChurchStore.Database.Repositorios
 
                     var sql = new StringBuilder();
                     sql.Append(" INSERT INTO pedidos ");
-                    sql.Append(" (`ClienteId`, `StatusId`, `PedidoData`) ");
+                    sql.Append(" (`ClienteId`, `StatusId`, `Data`) ");
                     sql.Append(" VALUES ");
                     sql.AppendFormat(" ('{0}', '{1}', '{2}'); ", clienteId, 1, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
@@ -242,11 +242,6 @@ namespace ChurchStore.Database.Repositorios
         {
             try
             {
-                int qtdAtualProduto = await RetornaQuantidadeProdutoNoEstoque(produtoId);
-                int qtdProdutosRetorno = await RetornaQuantidadeProdutoPorCliente(clienteId, produtoId, pedidoId);
-                int quantidadeTotalProduto = qtdAtualProduto + qtdProdutosRetorno;
-                AlterarQuantidadeEstoque(produtoId, quantidadeTotalProduto);
-
                 using (var conn = new MySqlConnection(_connMySql))
                 {
                     await conn.OpenAsync();
@@ -314,7 +309,7 @@ namespace ChurchStore.Database.Repositorios
 
                     if (reader.Read())
                     {
-                        response = reader.GetInt32(reader.GetOrdinal("PedidoId"));
+                        response = reader.GetInt32(reader.GetOrdinal("Id"));
                     }
                     return response;
                 }
@@ -334,7 +329,7 @@ namespace ChurchStore.Database.Repositorios
 
                     var sql = new StringBuilder();
                     sql.Append(" SELECT Quantidade FROM produtos ");
-                    sql.AppendFormat(" where ProdutoId = {0} ", produtoId);
+                    sql.AppendFormat(" where Id = {0} ", produtoId);
 
                     using MySqlCommand command = new(sql.ToString(), conn);
 
@@ -421,7 +416,7 @@ namespace ChurchStore.Database.Repositorios
             }
         }
 
-        public async void AlterarQuantidadeEstoque(int produtoId, int quantidade)
+        public async Task<bool> AlterarQuantidadeEstoque(int produtoId, int quantidade)
         {
             try
             {
@@ -432,12 +427,13 @@ namespace ChurchStore.Database.Repositorios
                     var sql = new StringBuilder();
                     sql.Append(" UPDATE produtos ");
                     sql.AppendFormat(" set quantidade = {0} ", quantidade);
-                    sql.AppendFormat(" where ProdutoId = {0} ", produtoId);
+                    sql.AppendFormat(" where Id = {0} ", produtoId);
 
                     using MySqlCommand command = new(sql.ToString(), conn);
 
                     using MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
 
+                    return true;
                 }
             }
             catch

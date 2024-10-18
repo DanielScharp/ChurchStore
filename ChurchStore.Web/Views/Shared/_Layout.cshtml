@@ -118,22 +118,26 @@
 </div>
 <script>
 
-    //Model genérico para alertas //Não tem callback
-    var JsAlert = function (info) {
+    var JsAlert = function (info, callback) {
+        // Exibe o modal
         $('#modalJsAlert').modal({
             backdrop: 'static',
             keyboard: false,
             show: true
         });
 
+        // Atualiza o texto do modal
         $("#modalJsAlertInfo").html(info);
 
-        //Modal de calerta
-        $('#modalJsAlertOk').click(function () {
-            //Remove o evento dos botões
-            $('#modalJsAlertOk').off('click');
+        // Remove o evento de clique anterior para evitar múltiplas associações
+        $('#modalJsAlertOk').off('click').on('click', function () {
+            // Fecha o modal
             $('#modalJsAlert').modal('hide');
 
+            // Executa o callback, se definido
+            if (callback) {
+                callback();
+            }
         });
     };
 

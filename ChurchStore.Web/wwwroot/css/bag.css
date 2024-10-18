@@ -1,4 +1,10 @@
-﻿.product-card {
+﻿.containerProduto {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.product-card {
     display: flex;
     flex-direction: column;
     font-family: sans-serif;

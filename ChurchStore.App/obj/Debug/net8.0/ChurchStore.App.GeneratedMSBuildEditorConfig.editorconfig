@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ChurchStore.App
-build_property.ProjectDir = C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.App\
+build_property.ProjectDir = C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.App\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

@@ -1,0 +1,268 @@
+[
+  {
+    "ContainingType": "ChurchStore.API.Controllers.UsuariosController",
+    "Method": "Alterar",
+    "RelativePath": "Usuarios/Alterar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "ChurchStore.Domain.Usuario",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ChurchStore.API.Controllers.UsuariosController",
+    "Method": "Cadastrar",
+    "RelativePath": "Usuarios/cadastrar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "ChurchStore.Domain.Login",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ChurchStore.API.Controllers.UsuariosController",
+    "Method": "Listar",
+    "RelativePath": "Usuarios/listar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChurchStore.API.Controllers.UsuariosController",
+    "Method": "Retornar",
+    "RelativePath": "Usuarios/retornar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "apelido",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "senha",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChurchStore.Api.Controllers.LoginController",
+    "Method": "AuthenticateAsync",
+    "RelativePath": "api/Login/in",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "ChurchStore.Domain.Login",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChurchStore.Api.Controllers.LoginController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/Login/reenviar-senha",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "ChurchStore.Domain.Login",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChurchStore.API.Controllers.PedidosController",
+    "Method": "AlterarStatusPedido",
+    "RelativePath": "api/Pedidos/Alterar-status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pedidoId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "statusId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChurchStore.API.Controllers.PedidosController",
+    "Method": "AdicionarItemAoPedido",
+    "RelativePath": "api/Pedidos/itens/adicionar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ChurchStore.Domain.AdicionarItemPedidoRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChurchStore.API.Controllers.PedidosController",
+    "Method": "ListarItens",
+    "RelativePath": "api/Pedidos/itens/listar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clienteId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChurchStore.API.Controllers.PedidosController",
+    "Method": "ListarItensPorPedido",
+    "RelativePath": "api/Pedidos/itens/listar-pedidoId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pedidoId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChurchStore.API.Controllers.PedidosController",
+    "Method": "RemoverItemDoPedido",
+    "RelativePath": "api/Pedidos/itens/remover",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ChurchStore.Domain.RemoverItemDoPedidoRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChurchStore.API.Controllers.PedidosController",
+    "Method": "Listar",
+    "RelativePath": "api/Pedidos/listar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChurchStore.API.Controllers.ProdutosController",
+    "Method": "AdicionarProduto",
+    "RelativePath": "api/Produtos/adicionar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "produto",
+        "Type": "ChurchStore.Domain.Produto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChurchStore.API.Controllers.ProdutosController",
+    "Method": "AlterarProduto",
+    "RelativePath": "api/Produtos/alterar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "produto",
+        "Type": "ChurchStore.Domain.Produto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChurchStore.API.Controllers.ProdutosController",
+    "Method": "Listar",
+    "RelativePath": "api/Produtos/listar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "publico",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChurchStore.API.Controllers.ProdutosController",
+    "Method": "Retornar",
+    "RelativePath": "api/Produtos/retornar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

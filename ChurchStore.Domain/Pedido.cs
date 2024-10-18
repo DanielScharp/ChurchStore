@@ -32,10 +32,18 @@ namespace ChurchStore.Domain
         public double Total { get; set; }
 
     }
+
     public class AdicionarItemPedidoRequest
-{
-    public int ClienteId { get; set; }
-    public int ProdutoId { get; set; }
-    public int Quantidade { get; set; }
-}
+    {
+        public int ClienteId { get; set; }
+        public int ProdutoId { get; set; }
+        public int Quantidade { get; set; }
+    }
+
+    public class RemoverItemDoPedidoRequest
+    {
+        public int ClienteId { get; set; }
+        public int ProdutoId { get; set; }
+        public int PedidoId { get; set; }
+    }
 }

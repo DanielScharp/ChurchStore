@@ -124,6 +124,33 @@ namespace ChurchStore.Web.Api
             }
 
         }
+        public async Task<ApiResponse> RemoverProdutosBag(int clienteId, int produtoId, int pedidoId)
+        {
+
+            try
+            {
+                var parameters = new Dictionary<string, string>
+                {
+                    {"clienteId", clienteId.ToString()},
+                    {"produtoId", produtoId.ToString()},
+                    {"pedidoId", pedidoId.ToString()},
+                };
+
+                var request = new ApiRequest
+                {
+                    RouteValue = "Pedidos/itens/remover",
+                    Content = parameters,
+                };
+
+                return await _apiService.PostAsync(request);
+
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
         //-----------------------------------------Fim BAG-----------------------------------------
         //-----------------------------------------Pedidos-----------------------------------------
         public async Task<ApiResponse> AdicionarItensNaSacola(int clienteId, int produtoId, int quantidade)

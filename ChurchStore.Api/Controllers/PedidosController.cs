@@ -76,25 +76,34 @@ namespace ChurchStore.API.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                // Retorna a mensagem do erro no campo Data
+                return BadRequest(new { Success = false, Data = ex.Message });
             }
         }
 
         [Route("itens/remover")]
         [HttpPost]
-        public async Task<IActionResult> RemoverItemDoPedido(int clienteId, int produtoId, int pedidoId)
+        public async Task<IActionResult> RemoverItemDoPedido([FromBody] RemoverItemDoPedidoRequest request)
         {
             try
             {
-                var removido = await _pedidosApplication.RemoverItemDoPedido(clienteId, produtoId, pedidoId);
-                return Ok(removido);
+                var removido = await _pedidosApplication.RemoverItemDoPedido(request.ClienteId, request.ProdutoId, request.PedidoId);
+
+                if (removido)
+                {
+                    return Ok(new { Success = true, Data = removido });
+                }
+                else
+                {
+                    return BadRequest(new { Success = false, Data = removido });
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
-
             }
         }
+
         [Route("Alterar-status")]
         [HttpPut]
         public IActionResult AlterarStatusPedido(int pedidoId, int statusId)

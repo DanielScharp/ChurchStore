@@ -24,32 +24,21 @@ namespace ChurchStore.Web.Controllers
             _apiSender = new ApiSender(apiService);
 
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-
-        //Listar os leilões Destaques para montar os destaques na inicial
-        [HttpGet]
-        public async Task<IActionResult> ListaProdutos()
+        public async Task<IActionResult> Index()
         {
 
             try
             {
                 var result = await _apiSender.ListarProdutos();
 
+                List<Produto>? listaProdutos = new List<Produto>();
+
                 if (result.Success)
                 {
-                    var listaProdutos = JsonConvert.DeserializeObject<List<Produto>>(result.Data.ToString());
-                    return View("_ListaProdutos", listaProdutos);
-                }
-                else
-                {
-                    return Json(new { success = false, message = result.Message });
+                    listaProdutos = JsonConvert.DeserializeObject<List<Produto>>(result.Data.ToString());
                 }
 
-
+                return View(listaProdutos);
             }
             catch (Exception ex)
             {
@@ -64,23 +53,23 @@ namespace ChurchStore.Web.Controllers
             {
 
                 var clienteId = ClienteSessao.Logado.UsuarioId;
-                var mensagemRetorno = new StringBuilder();
-                mensagemRetorno.Append(" <span>Os produtos foram adicionados ao carrinho!</span><br />");
+                string mensagemRetorno = "";
 
                 foreach (Produto produto in produtos)
                 {
                     var result = await _apiSender.AdicionarItensNaSacola(clienteId, produto.ProdutoId, produto.Quantidade);
-                    if (!result.Success)
+                    if (result.Success)
                     {
-                        mensagemRetorno.AppendFormat(" <span>Houve um erro!</span><br />");
+                        mensagemRetorno += " <span>" + produto.ProdutoNome + " adicionado ao carrinho! (unidades: " + produto.Quantidade + ")</span><br /> ";
                     }
-
-                    var quantidadeRestanteEstoque = JsonConvert.DeserializeObject<int>(result.Data.ToString());
-
+                    else
+                    {
+                        mensagemRetorno += " <span style='color:#f00'>Não foi possível adicionar " + produto.ProdutoNome + "!</span><br />";
+                        mensagemRetorno += " <span style='color:#f00'>" + result.Data + "</span><br />";
+                    }
                 }
 
                 return Json(new { success = true, data = mensagemRetorno });
-
 
             }
             catch (Exception ex)

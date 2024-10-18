@@ -17,59 +17,55 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ChurchStore.Web
 build_property.RootNamespace = ChurchStore.Web
-build_property.ProjectDir = C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Web\
+build_property.ProjectDir = C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.Web\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Daniel.scharp\Desktop\Repositorios\ChurchStore\ChurchStore.Web
+build_property.MSBuildProjectDirectory = C:\Users\Daniel.scharp\Desktop\ChurchStore\ChurchStore.Web
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Daniel.scharp/Desktop/Repositorios/ChurchStore/ChurchStore.Web/Views/Bag/Index.cshtml]
+[C:/Users/Daniel.scharp/Desktop/ChurchStore/ChurchStore.Web/Views/Bag/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFnXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Daniel.scharp/Desktop/Repositorios/ChurchStore/ChurchStore.Web/Views/Bag/_ListarProdutosBag.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFnXF9MaXN0YXJQcm9kdXRvc0JhZy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Daniel.scharp/Desktop/Repositorios/ChurchStore/ChurchStore.Web/Views/Home/Index.cshtml]
+[C:/Users/Daniel.scharp/Desktop/ChurchStore/ChurchStore.Web/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Daniel.scharp/Desktop/Repositorios/ChurchStore/ChurchStore.Web/Views/Home/Lista.cshtml]
+[C:/Users/Daniel.scharp/Desktop/ChurchStore/ChurchStore.Web/Views/Home/Lista.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMaXN0YS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Daniel.scharp/Desktop/Repositorios/ChurchStore/ChurchStore.Web/Views/Home/_ListaProdutos.cshtml]
+[C:/Users/Daniel.scharp/Desktop/ChurchStore/ChurchStore.Web/Views/Home/_ListaProdutos.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfTGlzdGFQcm9kdXRvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Daniel.scharp/Desktop/Repositorios/ChurchStore/ChurchStore.Web/Views/Login/AcessoNegado.cshtml]
+[C:/Users/Daniel.scharp/Desktop/ChurchStore/ChurchStore.Web/Views/Login/AcessoNegado.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cQWNlc3NvTmVnYWRvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Daniel.scharp/Desktop/Repositorios/ChurchStore/ChurchStore.Web/Views/Login/Index.cshtml]
+[C:/Users/Daniel.scharp/Desktop/ChurchStore/ChurchStore.Web/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Daniel.scharp/Desktop/Repositorios/ChurchStore/ChurchStore.Web/Views/Login/SolicitarNovaSenha.cshtml]
+[C:/Users/Daniel.scharp/Desktop/ChurchStore/ChurchStore.Web/Views/Login/SolicitarNovaSenha.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cU29saWNpdGFyTm92YVNlbmhhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Daniel.scharp/Desktop/Repositorios/ChurchStore/ChurchStore.Web/Views/Shared/Error.cshtml]
+[C:/Users/Daniel.scharp/Desktop/ChurchStore/ChurchStore.Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Daniel.scharp/Desktop/Repositorios/ChurchStore/ChurchStore.Web/Views/_ViewImports.cshtml]
+[C:/Users/Daniel.scharp/Desktop/ChurchStore/ChurchStore.Web/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Daniel.scharp/Desktop/Repositorios/ChurchStore/ChurchStore.Web/Views/_ViewStart.cshtml]
+[C:/Users/Daniel.scharp/Desktop/ChurchStore/ChurchStore.Web/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Daniel.scharp/Desktop/Repositorios/ChurchStore/ChurchStore.Web/Views/Shared/_Layout.cshtml]
+[C:/Users/Daniel.scharp/Desktop/ChurchStore/ChurchStore.Web/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ap0huh38jq

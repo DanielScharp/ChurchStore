@@ -58,11 +58,18 @@ namespace ChurchStore.App
         {
             try
             {
+                int estoqueRestante = 0;
                 int pedidoId = await _pedidosRepositorio.RetornaIdPedidoAberto(clienteId);
 
                 int estoqueProduto = await _pedidosRepositorio.RetornaQuantidadeProdutoNoEstoque(produtoId);
 
-                int estoqueRestante = estoqueProduto - quantidade;
+                if (estoqueProduto >= quantidade)
+                {
+                    estoqueRestante = estoqueProduto - quantidade;
+                }
+                else {
+                    throw new Exception("Erro: Não há estoque suficiente!");
+                }
 
                 _pedidosRepositorio.AlterarQuantidadeEstoque(produtoId, estoqueRestante);
 
@@ -99,7 +106,23 @@ namespace ChurchStore.App
         {
             try
             {
-                return await _pedidosRepositorio.RemoverItemDoPedido(clienteId, produtoId, pedidoId);
+                int qtdAtualProduto = await _pedidosRepositorio.RetornaQuantidadeProdutoNoEstoque(produtoId);
+
+                int qtdProdutosRetorno = await _pedidosRepositorio.RetornaQuantidadeProdutoPorCliente(clienteId, produtoId, pedidoId);
+
+                int quantidadeTotalProduto = qtdAtualProduto + qtdProdutosRetorno;
+
+                bool quantidadeAlterada = await _pedidosRepositorio.AlterarQuantidadeEstoque(produtoId, quantidadeTotalProduto);
+
+                if (quantidadeAlterada)
+                {
+                    return await _pedidosRepositorio.RemoverItemDoPedido(clienteId, produtoId, pedidoId);
+                }
+                else
+                {
+                    return false;
+                }
+
             }
             catch
             {
