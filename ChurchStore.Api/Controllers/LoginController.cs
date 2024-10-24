@@ -15,13 +15,13 @@ namespace ChurchStore.Api.Controllers
     {
         private readonly UsuariosApplication _usuarioApplication;
         private readonly MailSender _emailSender;
+        private readonly TokenService _tokenService;
 
-
-        public LoginController(UsuariosApplication usuarioApplication, MailSender emailsender)
+        public LoginController(UsuariosApplication usuarioApplication, MailSender emailsender, TokenService tokenService)
         {
             _usuarioApplication = usuarioApplication;
             _emailSender = emailsender;
-
+            _tokenService = tokenService;
         }
 
         [HttpPost]
@@ -61,7 +61,7 @@ namespace ChurchStore.Api.Controllers
                     return NotFound(ResultMessage.Erro("Usuário não localizado com os dados informados!"));
                 }
 
-                var token = TokenService.GenerateToken(user);
+                var token = _tokenService.GenerateToken(user);
 
                 var loginResult = new LoginResult
                 {

@@ -30,7 +30,6 @@ TestResults/
 *.coverage
 
 # Ignore application secrets
-Key.cs
 appsettings.json
 
 # Optional: Ignore environment-specific appsettings (for local development)

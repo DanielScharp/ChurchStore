@@ -1,4 +1,5 @@
 ﻿using ChurchStore.Domain;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -8,10 +9,16 @@ namespace ChurchStore.ApiAdmin.Services
 {
     public class TokenService
     {
-        public static string GenerateToken(Usuario user)
+        private readonly TokenSettings _tokenSettings;
+
+        public TokenService(IOptions<TokenSettings> tokenSettings)
+        {
+            _tokenSettings = tokenSettings.Value;
+        }
+        public string GenerateToken(Usuario user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(TokenSettings.Secret);
+            var key = Encoding.ASCII.GetBytes(_tokenSettings.Key);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

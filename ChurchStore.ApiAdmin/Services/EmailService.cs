@@ -1,19 +1,26 @@
 ﻿using ChurchStore.ApiAdmin.Mail;
 using MimeKit;
 using MailKit.Net.Smtp;
+using Microsoft.Extensions.Options;
 
 namespace ChurchStore.ApiAdmin.Services
 {
     public class EmailService
     {
+        private readonly EmailSettings _emailSettings;
+
+        public EmailService(IOptions<EmailSettings> emailSettings)
+        {
+            _emailSettings = emailSettings.Value;
+        }
+
         public async Task EnviarEmail(MailRequest props)
         {
-            string emailRemetente = "scharp.suporte@gmail.com";
             // instanciar classe de mensagem 'mimemessage' 
             var message = new MimeMessage();
 
             //from address
-            message.From.Add(new MailboxAddress("Livres Church", emailRemetente));
+            message.From.Add(new MailboxAddress(_emailSettings.EmailNome, _emailSettings.EmailRemetente));
 
             // subject
             message.Subject = props.Subject;
@@ -29,13 +36,13 @@ namespace ChurchStore.ApiAdmin.Services
 
             using (var client = new SmtpClient())
             {
-                client.Connect("smtp.gmail.com", 465, true); //465 é a porta do seu servidor de email
+                await client.ConnectAsync(_emailSettings.SmtpServer, _emailSettings.Porta, true);
 
-                client.Authenticate(emailRemetente, "");
+                await client.AuthenticateAsync(_emailSettings.EmailRemetente, _emailSettings.Senha);
 
-                client.Send(message);
+                await client.SendAsync(message);
 
-                client.Disconnect(true);
+                await client.DisconnectAsync(true);
             }
         }
 

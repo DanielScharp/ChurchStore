@@ -67,7 +67,7 @@ namespace ChurchStore.Database.Repositorios
 
                     var sql = new StringBuilder();
                     sql.Append(" SELECT * FROM church_store.usuarios ");
-                    sql.AppendFormat(" where apelido = '{0}' ", apelido);
+                    sql.AppendFormat(" where login = '{0}' ", apelido);
                     sql.AppendFormat(" and email = '{0}' ", email);
 
                     using MySqlCommand command = new(sql.ToString(), conn);
@@ -82,7 +82,7 @@ namespace ChurchStore.Database.Repositorios
                         usuario.UsuarioId = reader.GetInt32(reader.GetOrdinal("usuarioId"));
                         usuario.Nome = reader[reader.GetOrdinal("nome")].ToString();
                         usuario.Email = reader[reader.GetOrdinal("email")].ToString();
-                        usuario.Apelido = reader[reader.GetOrdinal("apelido")].ToString();
+                        usuario.Apelido = reader[reader.GetOrdinal("login")].ToString();
                     }
 
                     return usuario;

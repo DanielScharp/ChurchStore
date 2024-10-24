@@ -10,6 +10,10 @@ IConfiguration configuration = builder.Configuration;
 
 string connectionString = configuration.GetConnectionString("MySqlConnection");
 
+// Adicionando configuração de EmailSettings para injeção de dependência
+builder.Services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
+builder.Services.Configure<TokenSettings>(configuration.GetSection("TokenSettings"));
+
 // Criando instâncias de UsuarioRepositorio      
 var usuariosRepositorio = new UsuariosRepositorio(connectionString);
 var produtosRepositorio = new ProdutosRepositorio(connectionString);
@@ -29,6 +33,7 @@ builder.Services.AddScoped<MailSender>();
 builder.Services.AddScoped<UsuariosApplication>();
 builder.Services.AddScoped<ProdutosApplication>();
 builder.Services.AddScoped<PedidosApplication>();
+builder.Services.AddScoped<TokenService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
