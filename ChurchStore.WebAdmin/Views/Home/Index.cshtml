@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ChurchStore.Domain.Pedido>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table table-sm table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>PedidoId</th>
+            <th>Solicitante</th>
+            <th>Status</th>
+            <th>Solicitação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pedido in Model)
+        {
+            <tr>
+                <td>
+                    <div class="btn btn-sm btn-secondary" onclick="verPedido(@pedido.PedidoId)">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </td>
+                <td>@pedido.PedidoId</td>
+                <td>@pedido.ClienteNome</td>
+                <td>@pedido.StatusNome</td>
+                <td>@pedido.PedidoData</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal" id="modalPedidoInfo" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title">Atenção!</h5>
+
+            </div>
+            <div class="modal-body" id="PedidoInfoResult">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var verPedido = function(pedidoId){
+        $.ajax({
+            method: "GET",
+            url: "/Home/ListarItensPedido?pedidoId="+pedidoId,
+            success: function (data) {
+                $("#PedidoInfoResult").html(data)
+            }
+        })
+
+        $('#modalPedidoInfo').modal({
+            show: true
+        });
+    }
+</script>

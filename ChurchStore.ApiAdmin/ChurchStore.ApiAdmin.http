@@ -1,0 +1,6 @@
+@ChurchStore.ApiAdmin_HostAddress = http://localhost:5167
+
+GET {{ChurchStore.ApiAdmin_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

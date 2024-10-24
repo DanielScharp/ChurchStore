@@ -1,0 +1,126 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <!-- Importação do jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body class="w-screen h-screen bg-slate-800">
+    <div class="w-screen h-screen flex items-center justify-center flex-col gap-2">
+        <div class="w-80 px-4 py-2 bg-yellow-100 border-4 border-yellow-100 border-l-yellow-400 rounded hidden" id="dvResultLogin">
+            <!--div de alertas-->
+        </div>
+        <form class="group relative flex flex-col gap-2">
+            <input type="text"
+                   id="apelido"
+                   name="username"
+                   class="w-80 focus:ring-blue-500 focus:outline-none text-sm placeholder-slate-400 rounded-md p-2 ring-1 ring-slate-200 shadow-sm bg-slate-700 text-white" placeholder="Apelido">
+            <input type="password"
+                   id="password"
+                   name="password"
+                   class="w-80 focus:ring-blue-500 focus:outline-none text-sm placeholder-slate-400 rounded-md p-2 ring-1 ring-slate-200 shadow-sm bg-slate-700 text-white" placeholder="Senha">
+            <button type="button"
+                    id="loginForm"
+                    class="w-80 text-sm placeholder-slate-600 rounded-md p-2 shadow-sm bg-slate-600 text-white hover:bg-slate-700">
+                Login
+            </button>
+            <a href="/Login/SolicitarNovaSenha">Solicitar nova senha</a>
+        </form>
+    </div>
+    <script src="/js/crypto.js"></script>
+    <script>
+        $(function () {
+
+            $("#loginForm").click(function () {
+                efetuarLogin();
+            });
+
+        });
+        //Login
+        var efetuarLogin = function () {
+            var apelido = $("#apelido").val();
+            var password = $("#password").val();
+
+            //*-----------------*/
+            if (apelido == undefined || apelido == '') {
+
+                $("#dvResultLogin").html("<div class='alert alert-sm alert-danger'>O campo [Apelido] é obrigatório, e deve conter pelo menos 5 caracteres.</div>");
+                $("#dvResultLogin").removeClass("hidden");
+
+                return;
+            }
+
+
+            if (password == undefined || password == '') {
+                $("#dvResultLogin").html("<div class='alert alert-sm alert-danger'>O campo [Senha] é obrigatório, e deve conter pelo menos 5 caracteres.</div>");
+                $("#dvResultLogin").removeClass("hidden");
+                return;
+            }
+            //*-----------------*/
+
+            const key = CryptoJS.enc.Utf8.parse("ydvMmMc3I7HOje3i");
+            const iv = CryptoJS.enc.Utf8.parse("wp4zjuwGZwh593An");
+
+            //Encripta
+            var encPass = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(password), key,
+                {
+                    keySize: 128 / 8,
+                    iv: iv,
+                    mode: CryptoJS.mode.CBC,
+                    padding: CryptoJS.pad.Pkcs7
+                });
+
+            //Convert em string para passar na URL
+            var encPassString = window.btoa ? window.btoa(encPass) : Base64.encode(encPass + "");
+
+            var login = {
+                Apelido: apelido,
+                password: encPassString,
+                ipOrigem: "",
+                appOrigem: ""
+            }
+
+            $("#loginForm").prop("disabled", true);
+
+            $.ajax({
+                url: "/Login/In",
+                async: true,
+                type: "POST",
+                data: login
+            }).done(function (data) {
+
+                $("#loginForm").prop("disabled", false);
+
+                if (parseInt(data) == 1) {
+                    self.location = '/';
+                }
+                else {
+                    $("#dvResultLogin").html("<div class='alert alert-sm alert-danger'>" + data + "</div>");
+                    $("#dvResultLogin").removeClass("hidden");
+
+                }
+
+            }).fail(function (jqXHR, textStatus) {
+
+                $("#loginForm").prop("disabled", false);
+                $("#dvResultLogin").html("<div class='alert alert-sm alert-danger'>Ocorreu um erro ao tentar executar a operação. Tente mais tarde!</div>");
+            });
+        }
+    </script>
+</body>
+</html>

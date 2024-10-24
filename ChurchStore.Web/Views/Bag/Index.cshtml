@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ChurchStore.Domain.PedidoItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="~/css/bag.css" asp-append-version="true" />
+
+@if (Model.Count() == 0)
+{
+    <div style="width:100%;height:100%;text-align:center;">
+        O carrinho está vazio!
+    </div>
+}
+<div class="containerProduto">
+    @foreach (var produto in Model)
+    {
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="@produto.ImagemUrl" alt="" class="product-image" loading="lazy" />
+                <div class="delete-icon" onclick="removerProdutoCarrinho(@produto.ProdutoId, @produto.PedidoId)">
+                    <i class="fas fa-trash"></i>
+                </div>
+            </div>
+            <div class="product-details">
+                <div class="product-info">
+                    <h1 class="product-name">@produto.ProdutoNome</h1>
+                    <div class="product-price">@produto.ProdutoValor.ToString("C2")</div>
+                </div>
+                <div class="product-meta">
+                    <div class="product-quantity">Unidades @produto.Quantidade</div>
+                    <div class="product-total">@produto.Total.ToString("C2")</div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    var removerProdutoCarrinho = function(produtoId, pedidoId){
+        $.ajax({
+            method: "POST",
+            url: "/Bag/RemoverProdutosBag",
+            data: {
+                produtoId: produtoId,
+                pedidoId: pedidoId
+            },
+            success: function (data) {
+                if (data.success) {
+                    JsAlert(data.message, function () {
+                        location.reload();
+                    });
+                }
+                else {
+                    JsAlert(data.message)
+                }
+
+            }
+        })
+    }
+</script>

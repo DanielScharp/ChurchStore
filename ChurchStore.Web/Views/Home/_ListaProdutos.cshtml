@@ -1,0 +1,124 @@
+﻿@model IEnumerable<ChurchStore.Domain.Produto>
+
+@{
+    Layout = null;
+}
+
+@foreach(var item in Model)
+{
+    <div class="produto">
+        <div class="containerImg">
+            <img src='@item.ImagemUrl' alt="" />
+        </div>
+        <div class="containerDados">
+            <div class="informacoes">
+                <h1 class="nome">
+                    @item.ProdutoNome
+                </h1>
+                <div class="valor">
+                    <input type="hidden" value="@item.ProdutoValor" id="hddValor-@item.ProdutoId" />
+                    @item.ProdutoValor.ToString("C2")
+                </div>
+                <div class="quantidade">
+                    Quantidade disponível <span id="quantidadeEmEstoque-@item.ProdutoId">@item.Quantidade</span>
+                    <input type="hidden" value="@item.Quantidade" id="hddQuantidadeEmEstoque-@item.ProdutoId" />
+                </div>
+            </div>
+            <div class="reservas">
+                <div class="reservasFlex">
+                    <div class="unidades">
+                        <div onClick="subtrairQuantidade(@item.ProdutoId)" class="w-8 lg:w-9 h-8 lg:h-9  rounded-lg flex items-center justify-center  bg-primary text-zinc-50 cursor-pointer">
+                            -
+                        </div>
+                        <div class="w-8 lg:w-9 h-8 lg:h-9 rounded-lg flex items-center justify-center bg-primary text-zinc-50">
+                            <input type="number" class="quantidadeProdutosSelecionados" id="quantidadeSelecionadosItem-@item.ProdutoId" value="0" />
+                        </div>
+                        <div onClick="adicionarQuantidade(@item.ProdutoId, @item.Quantidade)" class="w-8 lg:w-9 h-8 lg:h-9 rounded-lg flex items-center justify-center  bg-primary text-zinc-50 cursor-pointer">
+                            +
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+<div style="width: 100vw; padding: 1rem; background: #fff; border-top: 1px solid #333; position: fixed; bottom: 0px; right: 0px; display: flex; justify-content: space-around">
+    <div>
+        Total Pedido: <span id="total"></span>
+    </div>
+    <button onclick="adicionarItensNoCarrinho()">Reservar</button>
+</div>
+
+<script>
+    var totalPedido = 0.0;
+    var subtrairQuantidade = function (produtoId) {
+
+        var qtdSelecionado = $("#quantidadeSelecionadosItem-" + produtoId).val();
+        var qtdEstoque = $("#hddQuantidadeEmEstoque-" + produtoId).val();
+        if (qtdSelecionado > 0) {
+            $("#quantidadeSelecionadosItem-" + produtoId).val(parseInt(qtdSelecionado) - 1);
+            $("#hddQuantidadeEmEstoque-" + produtoId).html(parseInt(qtdEstoque) + 1);
+
+            totalPedido -= parseFloat($("#hddValor-" + produtoId).val().replace(",", "."));
+            $("#total").html(totalPedido.toString().replace(".", ","));
+        }
+        else {
+            alert("Não há estoque suficiente")
+        }
+    }
+
+    var adicionarQuantidade = function (produtoId, quantidadeEstoque) {
+
+        var qtdSelecionado = $("#quantidadeSelecionadosItem-" + produtoId).val();
+        var qtdEstoque = $("#hddQuantidadeEmEstoque-" + produtoId).val();
+
+        if (qtdSelecionado >= quantidadeEstoque) {
+            alert("Não há estoque suficiente");
+        }
+        else {
+            $("#quantidadeSelecionadosItem-" + produtoId).val(parseInt(qtdSelecionado) + 1);
+            $("#hddQuantidadeEmEstoque-" + produtoId).val(parseInt(qtdEstoque) - 1);
+
+            totalPedido += parseFloat($("#hddValor-" + produtoId).val().replace(",", "."));
+            $("#total").html(totalPedido.toString().replace(".", ","))
+        }
+    }
+
+    var adicionarItensNoCarrinho = function () {
+        var listaProdutos = [];
+        $(".quantidadeProdutosSelecionados").each(function (index, element) {
+
+            if (element.value > 0) {
+                var produtoId = $(this).attr('id').split('-')[1];
+                listaProdutos.push({
+                    ProdutoId: produtoId,
+                    Quantidade: element.value
+                });
+            }
+        })
+
+        // Verifica se listaProdutos está vazio
+        if (listaProdutos.length === 0) {
+            JsAlert("Nenhum produto foi selecionado.");
+            return;  // Sai da função sem fazer o AJAX
+        }
+        $.ajax({
+            method: "POST",
+            url: "/Home/AdicionarItensNaSacola",
+            contentType: "application/json; charset=utf-8",  // Define o tipo de conteúdo como JSON
+            data: JSON.stringify(listaProdutos),
+            success: function (data) {
+                if (data.success) {
+                    JsAlert(data.data)
+                }
+                else {
+                    JsAlert(data.data)
+                }
+            }
+        })
+    }
+
+
+</script>

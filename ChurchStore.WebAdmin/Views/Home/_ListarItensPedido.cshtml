@@ -1,0 +1,26 @@
+﻿@model IEnumerable<ChurchStore.Domain.PedidoItem>
+
+@{
+    Layout = null;
+}
+
+
+<table class="table table-sm table-striped">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Valor</th>
+            <th>Quantidade</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pedido in Model)
+        {
+            <tr>
+                <td>@pedido.ProdutoNome</td>
+                <td>@pedido.Quantidade</td>
+                <td>@pedido.ProdutoValor</td>
+            </tr>
+        }
+    </tbody>
+</table>
