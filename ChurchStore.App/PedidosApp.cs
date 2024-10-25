@@ -54,45 +54,55 @@ namespace ChurchStore.App
             }
         }
 
-        public async Task<int> AdicionarItemAoPedido(int clienteId, int produtoId, int quantidade)
+        public async Task<int> AdicionarItemAoPedido(AdicionarItemPedidoRequest request)
         {
             try
             {
                 int estoqueRestante = 0;
-                int pedidoId = await _pedidosRepositorio.RetornaIdPedidoAberto(clienteId);
+                double valorPedido = request.Valor * request.Quantidade;
+                int pedidoId = await _pedidosRepositorio.RetornaIdPedidoAberto(request.ClienteId);
 
-                int estoqueProduto = await _pedidosRepositorio.RetornaQuantidadeProdutoNoEstoque(produtoId);
+                int estoqueProduto = await _pedidosRepositorio.RetornaQuantidadeProdutoNoEstoque(request.ProdutoId);
 
-                if (estoqueProduto >= quantidade)
+                if (estoqueProduto >= request.Quantidade)
                 {
-                    estoqueRestante = estoqueProduto - quantidade;
+                    estoqueRestante = estoqueProduto - request.Quantidade;
                 }
                 else {
                     throw new Exception("Erro: Não há estoque suficiente!");
                 }
 
-                _pedidosRepositorio.AlterarQuantidadeEstoque(produtoId, estoqueRestante);
+                bool estoqueAlterado = await _pedidosRepositorio.AlterarQuantidadeEstoque(request.ProdutoId, estoqueRestante);
 
-                if (pedidoId > 0)
-                {
-                    PedidoItem verificaSeProdutoJaEstaNoPedido = await _pedidosRepositorio.VerificaSeProdutoJaEstaNoPedido(pedidoId, produtoId);
-                    var alteraQuantidade = verificaSeProdutoJaEstaNoPedido.Quantidade;
-                    quantidade = alteraQuantidade + quantidade;
-                    if (verificaSeProdutoJaEstaNoPedido.ProdutoId > 0)
+                if (estoqueAlterado) {
+                    if (pedidoId > 0)
                     {
-                        _pedidosRepositorio.AlterarQuantidadeItensPedido(pedidoId, produtoId, quantidade);
+                        PedidoItem verificaSeProdutoJaEstaNoPedido = await _pedidosRepositorio.VerificaSeProdutoJaEstaNoPedido(pedidoId, request.ProdutoId);
+                        var alteraQuantidade = verificaSeProdutoJaEstaNoPedido.Quantidade;
+                        request.Quantidade = alteraQuantidade + request.Quantidade;
+
+                        double valorAtual = await _pedidosRepositorio.RetornarValorPedido(pedidoId);
+                        valorPedido = valorPedido + valorAtual;
+                        _pedidosRepositorio.AlterarValorPedido(pedidoId, valorPedido);
+
+                        if (verificaSeProdutoJaEstaNoPedido.ProdutoId > 0)
+                        {
+                            _pedidosRepositorio.AlterarQuantidadeItensPedido(pedidoId, request.ProdutoId, request.Quantidade);
+                        }
+                        else
+                        {
+                            _pedidosRepositorio.InserirPedidoItem(pedidoId, request.ClienteId, request.ProdutoId, request.Quantidade);
+                        }
+
                     }
                     else
                     {
-                        _pedidosRepositorio.InserirPedidoItem(pedidoId, clienteId, produtoId, quantidade);
+                        pedidoId = await _pedidosRepositorio.AdicionarPedido(request.ClienteId, valorPedido);
+
+                        _pedidosRepositorio.InserirPedidoItem(pedidoId, request.ClienteId, request.ProdutoId, request.Quantidade);
                     }
                 }
-                else
-                {
-                    pedidoId = await _pedidosRepositorio.AdicionarPedido(clienteId);
-
-                    _pedidosRepositorio.InserirPedidoItem(pedidoId, clienteId, produtoId, quantidade);
-                }
+                
 
                 return estoqueRestante;
             }
@@ -102,21 +112,27 @@ namespace ChurchStore.App
             }
         }
 
-        public async Task<bool> RemoverItemDoPedido(int clienteId, int produtoId, int pedidoId)
+        public async Task<bool> RemoverItemDoPedido(RemoverItemDoPedidoRequest request)
         {
             try
             {
-                int qtdAtualProduto = await _pedidosRepositorio.RetornaQuantidadeProdutoNoEstoque(produtoId);
+                int qtdAtualProduto = await _pedidosRepositorio.RetornaQuantidadeProdutoNoEstoque(request.ProdutoId);
 
-                int qtdProdutosRetorno = await _pedidosRepositorio.RetornaQuantidadeProdutoPorCliente(clienteId, produtoId, pedidoId);
+                int qtdProdutosRetorno = await _pedidosRepositorio.RetornaQuantidadeProdutoPorCliente(request.ClienteId, request.ProdutoId, request.PedidoId);
 
                 int quantidadeTotalProduto = qtdAtualProduto + qtdProdutosRetorno;
 
-                bool quantidadeAlterada = await _pedidosRepositorio.AlterarQuantidadeEstoque(produtoId, quantidadeTotalProduto);
+                double valorPedido = qtdProdutosRetorno * request.ProdutoValor;
+                double valorAtual = await _pedidosRepositorio.RetornarValorPedido(request.PedidoId);
+                valorPedido = valorAtual - valorPedido;
+                _pedidosRepositorio.AlterarValorPedido(request.PedidoId, valorPedido);
+
+
+                bool quantidadeAlterada = await _pedidosRepositorio.AlterarQuantidadeEstoque(request.ProdutoId, quantidadeTotalProduto);
 
                 if (quantidadeAlterada)
                 {
-                    return await _pedidosRepositorio.RemoverItemDoPedido(clienteId, produtoId, pedidoId);
+                    return await _pedidosRepositorio.RemoverItemDoPedido(request.ClienteId, request.ProdutoId, request.PedidoId);
                 }
                 else
                 {

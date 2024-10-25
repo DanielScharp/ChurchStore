@@ -3,15 +3,21 @@
 @{
     ViewData["Title"] = "Index";
 }
+<link href="./css/pedidos.css" rel="stylesheet" />
+<h1>
+    Pedidos
+</h1>
 
 <table class="table table-sm table-striped">
     <thead>
         <tr>
             <th></th>
-            <th>PedidoId</th>
-            <th>Solicitante</th>
+            <th>Pedido</th>
+            <th>Realizado há</th>
             <th>Status</th>
-            <th>Solicitação</th>
+            <th>Solicitante</th>
+            <th>Total</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -19,14 +25,26 @@
         {
             <tr>
                 <td>
-                    <div class="btn btn-sm btn-secondary" onclick="verPedido(@pedido.PedidoId)">
+                    <div class="btn btn-sm btn-secondary" onclick="verPedido(@pedido.PedidoId, '@pedido.StatusNome', '@pedido.PedidoDataAbreviada')">
                         <i class="fas fa-search"></i>
                     </div>
                 </td>
                 <td>@pedido.PedidoId</td>
+                <td>@pedido.PedidoDataAbreviada</td>
+                <td>
+                    <div class="status">
+                        <i class="fas fa-circle @pedido.StatusNome"></i>
+                        <div>
+                            @pedido.StatusNome
+                        </div>
+
+                    </div>
+                </td>
                 <td>@pedido.ClienteNome</td>
-                <td>@pedido.StatusNome</td>
-                <td>@pedido.PedidoData</td>
+                <td>@pedido.PedidoValor.ToString("C2")</td>
+                <td>
+                    <button class="btn btn-sm btn-danger">Cancelar</button>
+                </td>
             </tr>
         }
     </tbody>
@@ -46,10 +64,10 @@
 </div>
 
 <script>
-    var verPedido = function(pedidoId){
+    var verPedido = function(pedidoId, status, data){
         $.ajax({
             method: "GET",
-            url: "/Home/ListarItensPedido?pedidoId="+pedidoId,
+            url: "/Home/ListarItensPedido?pedidoId="+pedidoId+"&status=" + status + "&dataAbreviada="+ data,
             success: function (data) {
                 $("#PedidoInfoResult").html(data)
             }

@@ -124,7 +124,7 @@ namespace ChurchStore.Web.Api
             }
 
         }
-        public async Task<ApiResponse> RemoverProdutosBag(int clienteId, int produtoId, int pedidoId)
+        public async Task<ApiResponse> RemoverProdutosBag(int clienteId, int produtoId, int pedidoId, double produtoValor)
         {
 
             try
@@ -134,6 +134,7 @@ namespace ChurchStore.Web.Api
                     {"clienteId", clienteId.ToString()},
                     {"produtoId", produtoId.ToString()},
                     {"pedidoId", pedidoId.ToString()},
+                    {"produtoValor", produtoValor.ToString().Replace(",", ".")},
                 };
 
                 var request = new ApiRequest
@@ -153,7 +154,7 @@ namespace ChurchStore.Web.Api
         }
         //-----------------------------------------Fim BAG-----------------------------------------
         //-----------------------------------------Pedidos-----------------------------------------
-        public async Task<ApiResponse> AdicionarItensNaSacola(int clienteId, int produtoId, int quantidade)
+        public async Task<ApiResponse> AdicionarItensNaSacola(int clienteId, Produto produto)
         {
 
             try
@@ -161,8 +162,9 @@ namespace ChurchStore.Web.Api
                 var parameters = new Dictionary<string, string>
                 {
                     {"clienteId", clienteId.ToString()},
-                    {"produtoId", produtoId.ToString()},
-                    {"quantidade", quantidade.ToString()},
+                    {"produtoId", produto.ProdutoId.ToString()},
+                    {"quantidade", produto.Quantidade.ToString()},
+                    {"Valor", produto.ProdutoValor.ToString().Replace(",", ".")},
                 };
 
                 var request = new ApiRequest

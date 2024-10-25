@@ -155,5 +155,46 @@ namespace ChurchStore.Database
             return result;
         }
 
+        public static string TimeAgo(this DateTime dateTime)
+        {
+            var timeSpan = DateTime.Now - dateTime;
+
+            if (timeSpan.TotalMinutes < 1)
+                return "há 1 minuto";
+
+            if (timeSpan.TotalMinutes < 60)
+            {
+                int minutes = (int)timeSpan.TotalMinutes;
+                return $"há {minutes} minuto{(minutes > 1 ? "s" : "")}";
+            }
+
+            if (timeSpan.TotalHours < 24)
+            {
+                int hours = (int)timeSpan.TotalHours;
+                return $"há {hours} hora{(hours > 1 ? "s" : "")}";
+            }
+
+            if (timeSpan.TotalDays < 7)
+            {
+                int days = (int)timeSpan.TotalDays;
+                return $"há {days} dia{(days > 1 ? "s" : "")}";
+            }
+
+            if (timeSpan.TotalDays < 30)
+            {
+                int weeks = (int)(timeSpan.TotalDays / 7);
+                return $"há {weeks} semana{(weeks > 1 ? "s" : "")}";
+            }
+
+            if (timeSpan.TotalDays < 365)
+            {
+                int months = (int)(timeSpan.TotalDays / 30);
+                return $"há {months} {(months > 1 ? "meses" : "mês")}";
+            }
+
+            int years = (int)(timeSpan.TotalDays / 365);
+            return $"há {years} ano{(years > 1 ? "s" : "")}";
+        }
+
     }
 }

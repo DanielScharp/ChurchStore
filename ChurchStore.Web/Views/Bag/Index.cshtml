@@ -17,7 +17,7 @@
         <div class="product-card">
             <div class="product-image-container">
                 <img src="@produto.ImagemUrl" alt="" class="product-image" loading="lazy" />
-                <div class="delete-icon" onclick="removerProdutoCarrinho(@produto.ProdutoId, @produto.PedidoId)">
+                <div class="delete-icon" onclick='removerProdutoCarrinho(@produto.ProdutoId, @produto.PedidoId)'>
                     <i class="fas fa-trash"></i>
                 </div>
             </div>
@@ -25,6 +25,8 @@
                 <div class="product-info">
                     <h1 class="product-name">@produto.ProdutoNome</h1>
                     <div class="product-price">@produto.ProdutoValor.ToString("C2")</div>
+                    <input type="hidden" value="@produto.ProdutoValor" id="hddValor-@produto.ProdutoId" />
+
                 </div>
                 <div class="product-meta">
                     <div class="product-quantity">Unidades @produto.Quantidade</div>
@@ -37,12 +39,14 @@
 
 <script>
     var removerProdutoCarrinho = function(produtoId, pedidoId){
+        var produtoValor = $("#hddValor-" + produtoId).val()
         $.ajax({
             method: "POST",
             url: "/Bag/RemoverProdutosBag",
             data: {
                 produtoId: produtoId,
-                pedidoId: pedidoId
+                pedidoId: pedidoId,
+                produtoValor: produtoValor
             },
             success: function (data) {
                 if (data.success) {

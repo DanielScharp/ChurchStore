@@ -3,14 +3,36 @@
 @{
     Layout = null;
 }
+<h3>
+    Pedido: @Model.Select(x => x.PedidoId).FirstOrDefault()
+</h3>
+<p>
+    Detalhes do pedido
+</p>
+<div class="header-pedidos">
+    <div class="header-pedido">
+        <div>Status</div>
+        <div class="status">
+            <i class="fas fa-circle @ViewBag.Status"></i>
+            <div>
+                @ViewBag.Status
+            </div>
 
+        </div>
+    </div>
+    <div class="header-pedido">
+        <div>Data</div>
+        <div>@ViewBag.Data</div>
+    </div>
 
+</div>
 <table class="table table-sm table-striped">
     <thead>
         <tr>
             <th>Produto</th>
-            <th>Valor</th>
             <th>Quantidade</th>
+            <th>Preço</th>
+            <th>SubTotal</th>
         </tr>
     </thead>
     <tbody>
@@ -19,7 +41,8 @@
             <tr>
                 <td>@pedido.ProdutoNome</td>
                 <td>@pedido.Quantidade</td>
-                <td>@pedido.ProdutoValor</td>
+                <td>@pedido.ProdutoValor.ToString("C2")</td>
+                <td>@((pedido.Quantidade * pedido.ProdutoValor).ToString("C2"))</td>
             </tr>
         }
     </tbody>

@@ -94,14 +94,16 @@
             if (element.value > 0) {
                 var produtoId = $(this).attr('id').split('-')[1];
                 var produtoNome = $("#hddNomeProduto-" + $(this).attr('id').split('-')[1]).val();
+                var produtoValor = $("#hddValor-" + $(this).attr('id').split('-')[1]).val();
                 listaProdutos.push({
                     ProdutoId: produtoId,
                     Quantidade: element.value,
-                    ProdutoNome: produtoNome
+                    ProdutoNome: produtoNome,
+                    ProdutoValor: produtoValor.replace(",", ".")
                 });
             }
         })
-
+        console.log(listaProdutos)
         // Verifica se listaProdutos está vazio
         if (listaProdutos.length === 0) {
             JsAlert("Nenhum produto foi selecionado.");

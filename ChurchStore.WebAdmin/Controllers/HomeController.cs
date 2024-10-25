@@ -42,17 +42,20 @@ namespace ChurchStore.WebAdmin.Controllers
             }
         }
 
-        public async Task<IActionResult> ListarItensPedido(int pedidoId)
+        public async Task<IActionResult> ListarItensPedido(int pedidoId, string status, string dataAbreviada)
         {
             try
             {
                 var result = await _apiSender.ListarItensPedidos(pedidoId);
-
                 List<PedidoItem> listaItens = new List<PedidoItem>();
+
                 if (result.Success)
                 {
                     listaItens = JsonConvert.DeserializeObject<List<PedidoItem>>(result.Data.ToString());
                 }
+                ViewBag.Status = status;
+                ViewBag.Data = dataAbreviada;
+
                 return View("_ListarItensPedido", listaItens);
 
             }
@@ -61,5 +64,6 @@ namespace ChurchStore.WebAdmin.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
     }
 }

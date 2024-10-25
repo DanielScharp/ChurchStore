@@ -39,7 +39,7 @@ namespace ChurchStore.API.Controllers
         {
             try
             {
-                var quantidadeRestanteEstoque = await _pedidosApplication.AdicionarItemAoPedido(request.ClienteId, request.ProdutoId, request.Quantidade);
+                var quantidadeRestanteEstoque = await _pedidosApplication.AdicionarItemAoPedido(request);
                 return Ok(new {Success = true, Data= quantidadeRestanteEstoque });
             }
             catch (Exception ex)
@@ -55,7 +55,7 @@ namespace ChurchStore.API.Controllers
         {
             try
             {
-                var removido = await _pedidosApplication.RemoverItemDoPedido(request.ClienteId, request.ProdutoId, request.PedidoId);
+                var removido = await _pedidosApplication.RemoverItemDoPedido(request);
 
                 if (removido)
                 {

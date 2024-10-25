@@ -57,7 +57,7 @@ namespace ChurchStore.Web.Controllers
 
                 foreach (Produto produto in produtos)
                 {
-                    var result = await _apiSender.AdicionarItensNaSacola(clienteId, produto.ProdutoId, produto.Quantidade);
+                    var result = await _apiSender.AdicionarItensNaSacola(clienteId, produto);
                     if (result.Success)
                     {
                         mensagemRetorno += " <span>" + produto.ProdutoNome + " adicionado ao carrinho! (unidades: " + produto.Quantidade + ")</span><br /> ";

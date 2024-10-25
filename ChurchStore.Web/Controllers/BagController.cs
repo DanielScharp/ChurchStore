@@ -43,14 +43,14 @@ namespace ChurchStore.Web.Controllers
             }
         }
 
-        public async Task<IActionResult> RemoverProdutosBag(int produtoId, int pedidoId)
+        public async Task<IActionResult> RemoverProdutosBag(int produtoId, int pedidoId, double produtoValor)
         {
 
             try
             {
                 var clienteId = ClienteSessao.Logado.UsuarioId;
 
-                var result = await _apiSender.RemoverProdutosBag(clienteId, produtoId, pedidoId);
+                var result = await _apiSender.RemoverProdutosBag(clienteId, produtoId, pedidoId, produtoValor);
 
                 if (result.Success)
                 {

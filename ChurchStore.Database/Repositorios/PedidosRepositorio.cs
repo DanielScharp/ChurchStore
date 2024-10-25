@@ -43,6 +43,7 @@ namespace ChurchStore.Database.Repositorios
 
                         pedido.PedidoId = reader.GetInt32(reader.GetOrdinal("Id"));
                         pedido.PedidoData = reader[reader.GetOrdinal("Data")] != DBNull.Value ? reader.GetDateTime(reader.GetOrdinal("Data")) : new DateTime();
+                        pedido.PedidoDataAbreviada = DBValidate.TimeAgo(pedido.PedidoData);
                         pedido.PedidoValor = reader[reader.GetOrdinal("Valor")] != DBNull.Value ? reader.GetDouble(reader.GetOrdinal("Valor")) : 0;
                         pedido.ClienteNome = reader[reader.GetOrdinal("Nome")].ToString();
                         pedido.StatusId = reader.GetInt32(reader.GetOrdinal("StatusId"));
@@ -157,7 +158,7 @@ namespace ChurchStore.Database.Repositorios
         }
 
 
-        public async Task<int> AdicionarPedido(int clienteId)
+        public async Task<int> AdicionarPedido(int clienteId, double valor)
         {
             try
             {
@@ -169,9 +170,9 @@ namespace ChurchStore.Database.Repositorios
 
                     var sql = new StringBuilder();
                     sql.Append(" INSERT INTO pedidos ");
-                    sql.Append(" (`ClienteId`, `StatusId`, `Data`) ");
+                    sql.Append(" (`ClienteId`, `StatusId`, `Data`, `Valor`) ");
                     sql.Append(" VALUES ");
-                    sql.AppendFormat(" ('{0}', '{1}', '{2}'); ", clienteId, 1, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    sql.AppendFormat(" ('{0}', '{1}', '{2}', '{3}'); ", clienteId, 1, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), valor);
 
                     sql.Append(" SELECT LAST_INSERT_ID() as UltimoId;"); // Adicionando a consulta para obter o último ID inserido
 
@@ -229,6 +230,64 @@ namespace ChurchStore.Database.Repositorios
                     sql.Append(" UPDATE pedidos ");
                     sql.AppendFormat(" set StatusId = {0} ", statusId);
                     sql.AppendFormat(" where PedidoId = {0} ", pedidoId);
+
+                    using MySqlCommand command = new(sql.ToString(), conn);
+
+                    using MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
+
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<double> RetornarValorPedido(int pedidoId)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(_connMySql))
+                {
+                    await conn.OpenAsync();
+
+                    var sql = new StringBuilder();
+                    sql.Append(" SELECT Valor ");
+                    sql.Append(" FROM pedidos");
+                    sql.AppendFormat(" where Id ='{0}' ", pedidoId);
+
+                    using MySqlCommand command = new(sql.ToString(), conn);
+
+                    using MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
+
+                    double valor = 0;
+
+                    if (reader.Read())
+                    {
+                        valor = reader[reader.GetOrdinal("Valor")] != DBNull.Value ? reader.GetDouble(reader.GetOrdinal("Valor")) : 0;
+                    }
+
+                    return valor;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async void AlterarValorPedido(int pedidoId, double valor)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(_connMySql))
+                {
+                    await conn.OpenAsync();
+
+                    var sql = new StringBuilder();
+                    sql.Append(" UPDATE pedidos ");
+                    sql.AppendFormat(" set Valor = {0} ", valor);
+                    sql.AppendFormat(" where Id = {0} ", pedidoId);
 
                     using MySqlCommand command = new(sql.ToString(), conn);
 

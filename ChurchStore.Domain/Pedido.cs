@@ -15,6 +15,7 @@ namespace ChurchStore.Domain
         public int StatusId { get; set; }
         public string? StatusNome { get; set; }
         public DateTime PedidoData { get; set; }
+        public string? PedidoDataAbreviada { get; set; }
         public double PedidoValor { get; set; }
     }
 
@@ -38,6 +39,7 @@ namespace ChurchStore.Domain
         public int ClienteId { get; set; }
         public int ProdutoId { get; set; }
         public int Quantidade { get; set; }
+        public double Valor { get; set; }
     }
 
     public class RemoverItemDoPedidoRequest
@@ -45,5 +47,6 @@ namespace ChurchStore.Domain
         public int ClienteId { get; set; }
         public int ProdutoId { get; set; }
         public int PedidoId { get; set; }
+        public double ProdutoValor { get; set; }
     }
 }

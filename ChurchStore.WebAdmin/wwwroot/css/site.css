@@ -20,3 +20,38 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.Pendente {
+    width: 8px;
+    height: 8px;
+    color: #f00;
+}
+
+.Pago {
+    width: 8px;
+    height: 8px;
+    color: #00f;
+}
+
+.Pronto {
+    width: 8px;
+    height: 8px;
+    color: #ff0;
+}
+
+.Entregue {
+    width: 8px;
+    height: 8px;
+    color: #0f0;
+}
+
+.Cancelado {
+    width: 8px;
+    height: 8px;
+    color: #f00;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+}
