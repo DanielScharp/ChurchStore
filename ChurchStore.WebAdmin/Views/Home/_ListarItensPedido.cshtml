@@ -2,6 +2,11 @@
 
 @{
     Layout = null;
+    double totalPedido = 0;
+    foreach (var pedido in Model)
+    {
+        totalPedido += pedido.Quantidade * pedido.ProdutoValor;
+    }
 }
 <h3>
     Pedido: @Model.Select(x => x.PedidoId).FirstOrDefault()
@@ -46,4 +51,12 @@
             </tr>
         }
     </tbody>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>TOTAL</th>
+            <th>@totalPedido.ToString("C2")</th>
+        </tr>
+    </thead>
 </table>
