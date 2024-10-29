@@ -1,8 +1,10 @@
 ﻿using ChurchStore.Api;
+using ChurchStore.Api.Hubs;
 using ChurchStore.App;
 using ChurchStore.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ChurchStore.API.Controllers
 {
@@ -11,10 +13,11 @@ namespace ChurchStore.API.Controllers
     public class PedidosController : ControllerBase
     {
         private readonly PedidosApplication _pedidosApplication;
-
-        public PedidosController(PedidosApplication pedidosApplication)
+        private readonly IHubContext<PedidoHub> _hubContext;
+        public PedidosController(PedidosApplication pedidosApplication, IHubContext<PedidoHub> hubContext)
         {
             _pedidosApplication = pedidosApplication;
+            _hubContext = hubContext;
         }
 
         [Route("itens/listar")]
@@ -28,47 +31,44 @@ namespace ChurchStore.API.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
-
+                return BadRequest(new { Success = false, Data = ex.Message });
             }
         }
 
         [Route("itens/adicionar")]
         [HttpPost]
-        public async Task<IActionResult> AdicionarItemAoPedido([FromBody] AdicionarItemPedidoRequest request)
+        public async Task<IActionResult> AdicionarItemAoPedido([FromBody] PedidoItem request)
         {
             try
             {
-                var quantidadeRestanteEstoque = await _pedidosApplication.AdicionarItemAoPedido(request);
-                return Ok(new {Success = true, Data= quantidadeRestanteEstoque });
+                Pedido pedido = await _pedidosApplication.AdicionarItemAoPedido(request);
+
+                // Enviar notificação para o painel do administrador
+                await _hubContext.Clients.All.SendAsync("NovoPedido", new { Success = true, Message = "AlterPedido", Data = pedido });
+
+                return Ok(new {Success = true, Data = pedido });
             }
             catch (Exception ex)
             {
-                // Retorna a mensagem do erro no campo Data
                 return BadRequest(new { Success = false, Data = ex.Message });
             }
         }
 
         [Route("itens/remover")]
         [HttpPost]
-        public async Task<IActionResult> RemoverItemDoPedido([FromBody] RemoverItemDoPedidoRequest request)
+        public async Task<IActionResult> RemoverItemDoPedido([FromBody] PedidoItem request)
         {
             try
             {
-                var removido = await _pedidosApplication.RemoverItemDoPedido(request);
+                var pedido = await _pedidosApplication.RemoverItemDoPedido(request);
 
-                if (removido)
-                {
-                    return Ok(new { Success = true, Data = removido });
-                }
-                else
-                {
-                    return BadRequest(new { Success = false, Data = removido });
-                }
+                await _hubContext.Clients.All.SendAsync("NovoPedido", new { Success = true, Message = "RemovPedido", Data = pedido });
+
+                return Ok(new { Success = true, Data = pedido });
             }
             catch (Exception ex)
             {
-                throw ex;
+                return BadRequest(new { Success = false, Data = ex.Message });
             }
         }
 

@@ -1,3 +1,5 @@
+using ChurchStore.Api;
+using ChurchStore.Api.Hubs;
 using ChurchStore.Api.Mail;
 using ChurchStore.Api.Services;
 using ChurchStore.App;
@@ -13,6 +15,17 @@ string connectionString = configuration.GetConnectionString("MySqlConnection");
 // Adicionando configuração de EmailSettings para injeção de dependência
 builder.Services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
 builder.Services.Configure<TokenSettings>(configuration.GetSection("TokenSettings"));
+
+builder.Services.AddSignalR();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowWebAdmin",
+        policy => policy
+            .WithOrigins("https://localhost:7038") // Altere para a URL correta do WebAdmin
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials());
+});
 
 // Criando instâncias de UsuarioRepositorio      
 var usuariosRepositorio = new UsuariosRepositorio(connectionString);
@@ -48,6 +61,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("AllowWebAdmin");  // Utilize o CORS antes do MapHub
+app.MapHub<PedidoHub>("/pedidoHub");
 
 app.UseHttpsRedirection();
 

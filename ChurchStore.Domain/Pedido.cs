@@ -12,7 +12,7 @@ namespace ChurchStore.Domain
         public int ClienteId { get; set; }
         public string? ClienteNome { get; set; }
         public string? ClienteTel { get; set; }
-        public int StatusId { get; set; }
+        public int StatusId { get; set; } = 1;
         public string? StatusNome { get; set; }
         public DateTime PedidoData { get; set; }
         public string? PedidoDataAbreviada { get; set; }
@@ -32,21 +32,5 @@ namespace ChurchStore.Domain
         public int Quantidade { get; set; }
         public double Total { get; set; }
 
-    }
-
-    public class AdicionarItemPedidoRequest
-    {
-        public int ClienteId { get; set; }
-        public int ProdutoId { get; set; }
-        public int Quantidade { get; set; }
-        public double Valor { get; set; }
-    }
-
-    public class RemoverItemDoPedidoRequest
-    {
-        public int ClienteId { get; set; }
-        public int ProdutoId { get; set; }
-        public int PedidoId { get; set; }
-        public double ProdutoValor { get; set; }
     }
 }

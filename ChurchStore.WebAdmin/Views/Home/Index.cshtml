@@ -20,10 +20,10 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var pedido in Model)
+    <tbody id="listaPedidos">
+        @foreach (var pedido in Model.Where(x => x.PedidoValor > 0))
         {
-            <tr>
+            <tr id="pedido-@pedido.PedidoId">
                 <td>
                     <div class="btn btn-sm btn-secondary" onclick="verPedido(@pedido.PedidoId, '@pedido.StatusNome', '@pedido.PedidoDataAbreviada')">
                         <i class="fas fa-search"></i>
@@ -41,7 +41,7 @@
                     </div>
                 </td>
                 <td>@pedido.ClienteNome</td>
-                <td>@pedido.PedidoValor.ToString("C2")</td>
+                <td id="pedidoValor-@pedido.PedidoId">@pedido.PedidoValor.ToString("C2")</td>
                 <td>
                     <button class="btn btn-sm btn-danger">Cancelar</button>
                 </td>
@@ -77,4 +77,70 @@
             show: true
         });
     }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.9/signalr.min.js"></script>
+<!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.0/signalr.min.js"></script>
+-->
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("https://localhost:7234/pedidoHub")
+        .build();
+
+    connection.on("NovoPedido", (pedido) => {
+        console.log("Novo pedido recebido:", pedido);
+        if(pedido.success){
+            if(pedido.message == "AlterPedido"){
+                console.log(pedido.data)
+                if ($("#pedido-" + pedido.data.pedidoId).length) {
+                    console.log("AlterPedido alt")
+
+                    $("#pedidoValor-" + pedido.data.pedidoId).html("R$ " + pedido.data.pedidoValor.toString().replace(".", ","));
+                }
+                else {
+                    console.log("AlterPedido add")
+
+                        // Montando a nova linha para o pedido
+                    const newRow = `
+                        <tr id="pedido-${pedido.data.pedidoId}">
+                            <td>
+                                <div class="btn btn-sm btn-secondary" onclick="verPedido(${pedido.data.pedidoId}, '${pedido.data.statusNome}', '${pedido.data.pedidoDataAbreviada}')">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                            </td>
+                            <td>${pedido.data.pedidoId}</td>
+                            <td>${pedido.data.pedidoDataAbreviada}</td>
+                            <td>
+                                <div class="status">
+                                    <i class="fas fa-circle ${pedido.data.statusNome}"></i>
+                                    <div>
+                                        ${pedido.data.statusNome}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>${pedido.data.clienteNome}</td>
+                            <td id="pedidoValor-${pedido.data.pedidoId}">${pedido.data.pedidoValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger">Cancelar</button>
+                            </td>
+                        </tr>
+                    `;
+                    $("#listaPedidos").prepend(newRow);
+                }
+            }
+            else if(pedido.message == "RemovPedido"){ //é chamado no momento em que alguém retira um item do carrinho
+                if(pedido.data.pedidoValor > 0) {//se o valor for maior que 0, altera o valor exibido
+                    $("#pedidoValor-" + pedido.data.pedidoId).html("R$ " + pedido.data.pedidoValor.toString().replace(".", ","));
+                }
+                else {// se não remove o item da lista
+                    $("#pedido-" + pedido.data.pedidoId).remove();
+                }
+            }
+            
+        }
+
+    });
+
+    connection.start().catch(err => console.error(err.toString()));
+
 </script>

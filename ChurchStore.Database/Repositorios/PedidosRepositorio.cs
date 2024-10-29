@@ -60,6 +60,46 @@ namespace ChurchStore.Database.Repositorios
                 throw;
             }
         }
+        public async Task<Pedido> Retornar(int pedidoId)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(_connMySql))
+                {
+                    await conn.OpenAsync();
+
+                    var sql = new StringBuilder();
+                    sql.Append(" SELECT t1.*, t2.Status, t3.Nome ");
+                    sql.Append(" FROM pedidos t1 ");
+                    sql.Append(" left join pedidos_status t2 on t2.Id = t1.StatusId ");
+                    sql.Append(" LEFT JOIN usuarios t3 on t3.UsuarioId = t1.ClienteId ");
+                    sql.Append(" where t1.Id = " + pedidoId);
+
+                    using MySqlCommand command = new(sql.ToString(), conn);
+
+                    using MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
+
+                    var pedido = new Pedido();
+
+                    if (reader.Read())
+                    {
+                        pedido.PedidoId = reader.GetInt32(reader.GetOrdinal("Id"));
+                        pedido.PedidoData = reader[reader.GetOrdinal("Data")] != DBNull.Value ? reader.GetDateTime(reader.GetOrdinal("Data")) : new DateTime();
+                        pedido.PedidoDataAbreviada = DBValidate.TimeAgo(pedido.PedidoData);
+                        pedido.PedidoValor = reader[reader.GetOrdinal("Valor")] != DBNull.Value ? reader.GetDouble(reader.GetOrdinal("Valor")) : 0;
+                        pedido.ClienteNome = reader[reader.GetOrdinal("Nome")].ToString();
+                        pedido.StatusId = reader.GetInt32(reader.GetOrdinal("StatusId"));
+                        pedido.StatusNome = reader[reader.GetOrdinal("Status")].ToString();
+                    }
+
+                    return pedido;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
         public async Task<List<PedidoItem>> ListarItensPorCliente(int clienteId)
         {
             try
@@ -193,7 +233,7 @@ namespace ChurchStore.Database.Repositorios
             }
         }
 
-        public async Task<bool> RemoverItemDoPedido(int clienteId, int produtoId, int pedidoId)
+        public async void RemoverItemDoPedido(int clienteId, int produtoId, int pedidoId)
         {
             try
             {
@@ -208,8 +248,6 @@ namespace ChurchStore.Database.Repositorios
                     using MySqlCommand command = new(sql.ToString(), conn);
 
                     using MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
-
-                    return true;
                 }
             }
             catch

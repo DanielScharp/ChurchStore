@@ -164,7 +164,7 @@ namespace ChurchStore.Web.Api
                     {"clienteId", clienteId.ToString()},
                     {"produtoId", produto.ProdutoId.ToString()},
                     {"quantidade", produto.Quantidade.ToString()},
-                    {"Valor", produto.ProdutoValor.ToString().Replace(",", ".")},
+                    {"produtoValor", produto.ProdutoValor.ToString().Replace(",", ".")},
                 };
 
                 var request = new ApiRequest
