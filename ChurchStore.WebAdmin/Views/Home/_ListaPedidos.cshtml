@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ChurchStore.Domain.Pedido>
+
+@{
+    Layout = null;
+}
+@foreach (var pedido in Model.Where(x => x.PedidoValor > 0))
+{
+    <tr id="pedido-@pedido.PedidoId">
+        <td>
+            <div class="btn btn-sm btn-secondary" onclick="verPedido(@pedido.PedidoId, '@pedido.StatusNome', '@pedido.PedidoDataAbreviada')">
+                <i class="fas fa-search"></i>
+            </div>
+        </td>
+        <td>@pedido.PedidoId</td>
+        <td>@pedido.PedidoDataAbreviada</td>
+        <td>
+            <div class="status">
+                <i class="fas fa-circle @pedido.StatusNome"></i>
+                <div>
+                    @pedido.StatusNome
+                </div>
+            </div>
+        </td>
+        <td>@pedido.ClienteNome</td>
+        <td id="pedidoValor-@pedido.PedidoId">@pedido.PedidoValor.ToString("C2")</td>
+        @switch (pedido.StatusId)
+        {
+            case 1:
+                <td>
+                    <button class="btn btn-sm btn-info" onclick="alterarStatusPedido(@pedido.PedidoId, 2)">Pago</button>
+                </td>
+                break;
+            case 2:
+                <td>
+                    <button class="btn btn-sm btn-primary" onclick="alterarStatusPedido(@pedido.PedidoId, 3)">Pronto</button>
+                </td>
+                break;
+            case 3:
+                <td>
+                    <button class="btn btn-sm btn-success" onclick="alterarStatusPedido(@pedido.PedidoId, 4)">Entregue</button>
+                </td>
+                break;
+            default:
+                <td></td>
+                break;
+        }
+        <td>
+            <button class="btn btn-sm btn-danger">Cancelar</button>
+        </td>
+    </tr>
+}

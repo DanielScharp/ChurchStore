@@ -1,0 +1,22 @@
+﻿.containerProdutos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.containerProdutos .produto {
+    background: #ddd;
+    display: flex;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.containerProdutos .produto .produtoImg {
+    width: min(200px, 100%);
+    aspect-ratio: 14 / 9;
+    object-fit: cover;
+}
+
+.containerProdutos .produto .produtoDados {
+    padding: 1rem;
+}

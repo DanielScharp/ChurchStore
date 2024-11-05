@@ -23,6 +23,7 @@ namespace ChurchStore.Domain
     {
         public int ItemId { get; set; }
         public int PedidoId { get; set; }
+        public int PedidoStatus { get; set; }
         public int ClienteId { get; set; }
         public string? ClienteNome { get; set; }
         public int ProdutoId { get; set; }

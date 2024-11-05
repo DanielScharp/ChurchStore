@@ -1,0 +1,26 @@
+﻿@model ChurchStore.Domain.Produto
+
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-12">
+        <label>
+            Produto Id
+        </label>
+        <input class="form-control" type="text" value="@Model.ProdutoId" />
+    </div>
+    <div class="col-12">
+        <label>
+            Nome
+        </label>
+        <input class="form-control" type="text" value="@Model.ProdutoNome" />
+    </div>
+    <div class="col-12">
+        <label>
+            Imagem URL
+        </label>
+        <input class="form-control" type="text" value="@Model.ImagemUrl" />
+    </div>
+</div>

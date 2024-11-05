@@ -1,12 +1,23 @@
-﻿@model IEnumerable<ChurchStore.Domain.Pedido>
-
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 <link href="./css/pedidos.css" rel="stylesheet" />
-<h1>
-    Pedidos
-</h1>
+
+<div class="d-flex align-items-center mb-3" style="gap:1rem;">
+    Filtros:
+    <input class="form-control" id="filtro-idPedido" type="number" placeholder="Id do Pedido" />
+    <input class="form-control" id="filtro-nomeCliente" type="text" placeholder="Nome do Cliente" />
+    <select class="form-control" id="filtro-status">
+        <option value="0">Todos status</option>
+        <option value="1">Pendente</option>
+        <option value="2">Pago</option>
+        <option value="3">Pronto</option>
+        <option value="4">Entregue</option>
+        <option value="5">Cancelado</option>
+    </select>
+    <button class="btn btn-secondary w-100" onclick="ListarPedidos()">Filtrar resultados</button>
+    <button class="btn btn-secondary w-100" onclick="limpaFiltros()">Remover filtros</button>
+</div>
 
 <table class="table table-sm table-striped">
     <thead>
@@ -18,35 +29,11 @@
             <th>Solicitante</th>
             <th>Total</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody id="listaPedidos">
-        @foreach (var pedido in Model.Where(x => x.PedidoValor > 0))
-        {
-            <tr id="pedido-@pedido.PedidoId">
-                <td>
-                    <div class="btn btn-sm btn-secondary" onclick="verPedido(@pedido.PedidoId, '@pedido.StatusNome', '@pedido.PedidoDataAbreviada')">
-                        <i class="fas fa-search"></i>
-                    </div>
-                </td>
-                <td>@pedido.PedidoId</td>
-                <td>@pedido.PedidoDataAbreviada</td>
-                <td>
-                    <div class="status">
-                        <i class="fas fa-circle @pedido.StatusNome"></i>
-                        <div>
-                            @pedido.StatusNome
-                        </div>
-
-                    </div>
-                </td>
-                <td>@pedido.ClienteNome</td>
-                <td id="pedidoValor-@pedido.PedidoId">@pedido.PedidoValor.ToString("C2")</td>
-                <td>
-                    <button class="btn btn-sm btn-danger">Cancelar</button>
-                </td>
-            </tr>
-        }
+        
     </tbody>
 </table>
 
@@ -64,6 +51,10 @@
 </div>
 
 <script>
+    $(function(){
+        ListarPedidos();
+    })
+
     var verPedido = function(pedidoId, status, data){
         $.ajax({
             method: "GET",
@@ -77,11 +68,48 @@
             show: true
         });
     }
+
+    var ListarPedidos = function () {
+        var idPedido = $("#filtro-idPedido").val()
+        var nomeCliente = $("#filtro-nomeCliente").val()
+        var status = $("#filtro-status").val()
+
+        $.ajax({
+            method: "GET",
+            url: "/Home/ListaPedidos?pedidoId=" + idPedido + "&nomeCliente=" + nomeCliente + "&status=" + status,
+            success: function (data) {
+                $("#listaPedidos").html(data)
+            }
+        })
+
+    }
+    var alterarStatusPedido = function(pedidoId, status){
+        $.ajax({
+            method: "POST",
+            url: "/Home/AlterarStatusPedido?pedidoId=" + pedidoId + "&statusId=" + status,
+            success: function (data) {
+                console.log(data)
+
+                if (data.success){
+                    JsAlert(data.message, function () {
+                        location.reload();
+                    });
+                }
+                else {
+                    JsAlert("Erro: " + data.message)
+                }
+            }
+        })
+    }
+
+    var limpaFiltros = function () {
+        $("#filtro-idPedido").val("");
+        $("#filtro-nomeCliente").val("");
+        $("#filtro-status").val(0);
+        ListarPedidos();
+    }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.9/signalr.min.js"></script>
-<!--
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.0/signalr.min.js"></script>
--->
 <script>
     const connection = new signalR.HubConnectionBuilder()
         .withUrl("https://localhost:7234/pedidoHub")

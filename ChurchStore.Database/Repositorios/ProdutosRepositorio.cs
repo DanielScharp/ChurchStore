@@ -28,7 +28,7 @@ namespace ChurchStore.Database.Repositorios
                     var sql = new StringBuilder();
                     sql.Append(" SELECT * ");
                     sql.Append(" FROM produtos ");
-                    sql.AppendFormat(" where ProdutoId = {0} ", id);
+                    sql.AppendFormat(" where Id = {0} ", id);
 
                     using MySqlCommand command = new(sql.ToString(), conn);
 
@@ -38,13 +38,12 @@ namespace ChurchStore.Database.Repositorios
 
                     if (reader.Read())
                     {
-                        produto.ProdutoId = reader.GetInt32(reader.GetOrdinal("ProdutoId"));
-                        produto.ProdutoNome = reader[reader.GetOrdinal("ProdutoNome")].ToString();
-                        produto.ProdutoValor = reader[reader.GetOrdinal("ProdutoValor")] != DBNull.Value ? reader.GetDouble(reader.GetOrdinal("ProdutoValor")) : 0;
+                        produto.ProdutoId = reader.GetInt32(reader.GetOrdinal("Id"));
+                        produto.ProdutoNome = reader[reader.GetOrdinal("Nome")].ToString();
+                        produto.ProdutoValor = reader[reader.GetOrdinal("Valor")] != DBNull.Value ? reader.GetDouble(reader.GetOrdinal("Valor")) : 0;
                         produto.Quantidade = reader.GetInt32(reader.GetOrdinal("Quantidade"));
                         produto.ImagemUrl = reader[reader.GetOrdinal("ImagemUrl")].ToString();
                         produto.Exibir = reader[reader.GetOrdinal("Exibir")] != DBNull.Value ? reader.GetBoolean(reader.GetOrdinal("Exibir")) : false;
-
                     }
 
                     return produto;

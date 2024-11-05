@@ -16,18 +16,17 @@ namespace ChurchStore.App
             _pedidosRepositorio = pedidosRepositorio;
         }
 
-        public async Task<List<Pedido>> Listar()
+        public async Task<List<Pedido>> Listar(Pedido filtro)
         {
             try
             {
-                return await _pedidosRepositorio.Listar();
+                return await _pedidosRepositorio.Listar(filtro);
             }
             catch
             {
                 throw;
             }
         }
-
 
         public async Task<List<PedidoItem>> ListarItensPorCliente(int clienteId)
         {
@@ -40,7 +39,6 @@ namespace ChurchStore.App
                 throw;
             }
         }
-        
 
         public async Task<List<PedidoItem>> ListarItensPorPedido(int pedidoId)
         {
@@ -94,7 +92,6 @@ namespace ChurchStore.App
                         {
                             _pedidosRepositorio.InserirPedidoItem(pedido.PedidoId, request.ClienteId, request.ProdutoId, request.Quantidade);
                         }
-
                     }
                     else
                     {
@@ -106,7 +103,6 @@ namespace ChurchStore.App
                     pedido = await _pedidosRepositorio.Retornar(pedido.PedidoId);
 
                 }
-
 
                 return pedido;
             }
@@ -152,11 +148,11 @@ namespace ChurchStore.App
             }
         }
 
-        public async void AlterarStatusPedido(int pedidoId, int statusId)
+        public async Task AlterarStatusPedido(int pedidoId, int statusId)
         {
             try
             {
-                _pedidosRepositorio.AlterarStatusPedido(pedidoId, statusId);
+                await _pedidosRepositorio.AlterarStatusPedido(pedidoId, statusId);
             }
             catch
             {

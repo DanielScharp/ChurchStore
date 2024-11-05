@@ -24,16 +24,27 @@ namespace ChurchStore.WebAdmin.Controllers
 
         public async Task<IActionResult> Index()
         {
+            return View();
+        }
+
+        public async Task<IActionResult> ListaPedidos(int pedidoId, string nomeCliente, int status)
+        {
             try
             {
-                var result = await _apiSender.ListarPedidos();
+                Pedido filtroPedido = new Pedido();
+                filtroPedido.PedidoId = pedidoId;
+                filtroPedido.ClienteNome = nomeCliente;
+                filtroPedido.StatusId = status;
+
+                var result = await _apiSender.ListarPedidos(filtroPedido);
 
                 List<Pedido> listaPedidos = new List<Pedido>();
                 if (result.Success)
                 {
                     listaPedidos = JsonConvert.DeserializeObject<List<Pedido>>(result.Data.ToString());
                 }
-                return View(listaPedidos);
+
+                return View("_ListaPedidos", listaPedidos);
 
             }
             catch (Exception ex)
@@ -58,6 +69,21 @@ namespace ChurchStore.WebAdmin.Controllers
 
                 return View("_ListarItensPedido", listaItens);
 
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        public async Task<IActionResult> AlterarStatusPedido(int pedidoId, int statusId)
+        {
+            try
+            {
+                var result = await _apiSender.AlterarStatusPedido(pedidoId, statusId);
+
+                return Json(new { success = result.Success, message = result.Message });
+                
             }
             catch (Exception ex)
             {

@@ -16,8 +16,8 @@
     {
         <div class="product-card">
             <div class="product-image-container">
-                <img src="@produto.ImagemUrl" alt="" class="product-image" loading="lazy" />
-                <div class="delete-icon" onclick='removerProdutoCarrinho(@produto.ProdutoId, @produto.PedidoId)'>
+                <img src="@produto.ImagemUrl" alt="" class="product-image" />
+                <div class="delete-icon" onclick='removerProdutoCarrinho(@produto.ProdutoId, @produto.PedidoId)' @(produto.PedidoStatus != 1 ? "hidden" : "")>
                     <i class="fas fa-trash"></i>
                 </div>
             </div>

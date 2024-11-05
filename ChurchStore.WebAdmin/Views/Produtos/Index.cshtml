@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ChurchStore.Domain.Produto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="~/css/produtos.css" asp-append-version="true" />
+
+
+<div class="containerProdutos">
+    @foreach(var produto in Model)
+    {
+        <div class="produto">
+            <img src="@produto.ImagemUrl" class="produtoImg" />
+            <div class="produtoDados">
+                <div>
+                    <div>
+                        @produto.ProdutoNome
+                    </div>
+                    <div>
+                        @produto.ProdutoValor
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        Quantidade disponível: @produto.Quantidade
+                    </div>                    
+                    <div>
+                        <button onclick="verProduto(@produto.ProdutoId)">pencel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="modal" id="modalProdutoInfo" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title">Produto</h5>
+
+            </div>
+            <div class="modal-body" id="ProdutoInfoResult">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var verProduto = function(produtoId){
+        $.ajax({
+            method: "GET",
+            url: "/Produtos/RetornarProduto?id=" + produtoId,
+            success: function (data) {
+                $("#ProdutoInfoResult").html(data)
+            }
+        })
+
+        $('#modalProdutoInfo').modal({
+            show: true
+        });
+    }
+</script>

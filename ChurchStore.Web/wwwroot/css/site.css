@@ -1,3 +1,53 @@
+:root {
+    --primary-50: #F7F6FC;
+    --primary-100: #E6E4F7;
+    --primary-200: #D6D2F2;
+    --primary-300: #BDB7EB;
+    --primary-400: #A49BE3;
+    --primary-500: #594ACC;
+    --primary-600: #433899;
+    --primary-700: #312970;
+    --primary-800: #241E52;
+    --primary-900: #161333;
+    --primary-950: #0D0B1F;
+    --secondary-50: #F9F9F9;
+    --secondary-100: #ECECEC;
+    --secondary-200: #DFDFDF;
+    --secondary-300: #CBCBCB;
+    --secondary-400: #B8B8B8;
+    --secondary-500: #7E7E7E;
+    --secondary-600: #5F5F5F;
+    --secondary-700: #454545;
+    --secondary-800: #323232;
+    --secondary-900: #202020;
+    --secondary-950: #131313;
+}
+
+.dark-mode {
+    --primary-50: #FFF2F2;
+    --primary-100: #FFD9D9;
+    --primary-200: #FFBFBF;
+    --primary-300: #FF9999;
+    --primary-400: #FF7373;
+    --primary-500: #FF0000;
+    --primary-600: #BF0000;
+    --primary-700: #8C0000;
+    --primary-800: #660000;
+    --primary-900: #400000;
+    --primary-950: #260000;
+    --secondary-50: #F2FFF2;
+    --secondary-100: #D9FFD9;
+    --secondary-200: #BFFFBF;
+    --secondary-300: #99FF99;
+    --secondary-400: #73FF73;
+    --secondary-500: #00FF00;
+    --secondary-600: #00BF00;
+    --secondary-700: #008C00;
+    --secondary-800: #006600;
+    --secondary-900: #004000;
+    --secondary-950: #002600;
+}
+
 html {
   font-size: 14px;
 }
@@ -19,4 +69,67 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
+/* Estilos básicos para o dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    border: 2px solid #eee;
+    border-radius: 3px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    min-width: 160px;
+    right: 0; /* Alinha o menu principal à direita */
+
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Estilos para o submenu */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .submenu-content {
+    display: none;
+    position: absolute;
+    right: 100%; /* Posiciona o submenu à esquerda */
+    top: 0;
+    min-width: 160px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-submenu:hover .submenu-content {
+    display: block;
 }

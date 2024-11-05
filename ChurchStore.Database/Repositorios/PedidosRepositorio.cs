@@ -17,7 +17,7 @@ namespace ChurchStore.Database.Repositorios
             _connMySql = connMySql;
         }
 
-        public async Task<List<Pedido>> Listar()
+        public async Task<List<Pedido>> Listar(Pedido filtro)
         {
             try
             {
@@ -26,10 +26,25 @@ namespace ChurchStore.Database.Repositorios
                     await conn.OpenAsync();
 
                     var sql = new StringBuilder();
+
                     sql.Append(" SELECT t1.*, t2.Status, t3.Nome ");
                     sql.Append(" FROM pedidos t1 ");
                     sql.Append(" left join pedidos_status t2 on t2.Id = t1.StatusId ");
-                    sql.Append("LEFT JOIN usuarios t3 on t3.UsuarioId = t1.ClienteId ");
+                    sql.Append(" LEFT JOIN usuarios t3 on t3.UsuarioId = t1.ClienteId ");
+                    sql.Append(" where 1=1 ");
+
+                    if(filtro.PedidoId > 0)
+                    {
+                        sql.AppendFormat(" and t1.Id = '{0}' ", filtro.PedidoId);
+                    }
+                    if (filtro.StatusId > 0)
+                    {
+                        sql.AppendFormat(" and t2.Id = '{0}' ", filtro.StatusId);
+                    }
+                    if (!String.IsNullOrEmpty(filtro.ClienteNome))
+                    {
+                        sql.AppendFormat(" and t3.Nome like ('%{0}%') ", filtro.ClienteNome);
+                    }
 
                     using MySqlCommand command = new(sql.ToString(), conn);
 
@@ -109,13 +124,15 @@ namespace ChurchStore.Database.Repositorios
                     await conn.OpenAsync();
 
                     var sql = new StringBuilder();
-                    sql.Append(" SELECT t1.ProdutoId, t1.ClienteId, t1.PedidoId, SUM(t1.Quantidade) as 'Quantidade', SUM(t1.Quantidade * t2.Valor) as 'Total', ");
+                    sql.Append(" SELECT t1.ProdutoId, t1.ClienteId, t1.PedidoId, SUM(t1.Quantidade) as 'Quantidade', SUM(t1.Quantidade * t2.Valor) as 'Total', t4.StatusId, ");
                     sql.Append(" t2.Nome, t2.Valor, t2.ImagemUrl, t3.Nome ");
                     sql.Append(" FROM pedidos_itens t1 ");
                     sql.Append(" left join produtos t2 on t2.Id = t1.ProdutoId ");
                     sql.Append(" LEFT JOIN usuarios t3 ON t3.UsuarioId = t1.ClienteId ");
+                    sql.Append(" LEFT JOIN pedidos t4 ON t4.Id = t1.PedidoId ");
                     sql.AppendFormat(" where t1.ClienteId ='{0}' ", clienteId);
-                    sql.Append(" GROUP BY t1.PedidoId, t1.ProdutoId");
+                    sql.Append(" AND t4.StatusId in (1,2,3) ");
+                    sql.Append(" GROUP BY t1.PedidoId, t1.ProdutoId ");
 
                     using MySqlCommand command = new(sql.ToString(), conn);
 
@@ -129,6 +146,7 @@ namespace ChurchStore.Database.Repositorios
 
                         pedido.ProdutoId = reader.GetInt32(reader.GetOrdinal("ProdutoId"));
                         pedido.PedidoId = reader.GetInt32(reader.GetOrdinal("PedidoId"));
+                        pedido.PedidoStatus = reader.GetInt32(reader.GetOrdinal("StatusId"));
                         pedido.ClienteId = reader.GetInt32(reader.GetOrdinal("ClienteId"));
                         pedido.ClienteNome = reader[reader.GetOrdinal("Nome")].ToString();
                         pedido.Quantidade = reader.GetInt32(reader.GetOrdinal("Quantidade"));
@@ -256,7 +274,7 @@ namespace ChurchStore.Database.Repositorios
             }
         }
 
-        public async void AlterarStatusPedido(int pedidoId, int statusId)
+        public async Task AlterarStatusPedido(int pedidoId, int statusId)
         {
             try
             {
@@ -267,12 +285,11 @@ namespace ChurchStore.Database.Repositorios
                     var sql = new StringBuilder();
                     sql.Append(" UPDATE pedidos ");
                     sql.AppendFormat(" set StatusId = {0} ", statusId);
-                    sql.AppendFormat(" where PedidoId = {0} ", pedidoId);
+                    sql.AppendFormat(" where Id = {0} ", pedidoId);
 
                     using MySqlCommand command = new(sql.ToString(), conn);
 
                     using MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
-
                 }
             }
             catch
