@@ -44,7 +44,14 @@
                             </li>
                         }
                     </ul>
-                    <button class="mode-toggle" id="toggleButton">Ativar Modo Escuro</button>
+                    <div class="dropdown">
+                        <div class="dropdown-button"><i class="fas fa-cog"></i></div>
+                        <div class="dropdown-content">
+                            <div id="dark"><i class="fas fa-moon"></i> Escuro</div>
+                            <div id="light"><i class="fas fa-sun"></i> Claro</div>
+                        </div>
+                    </div>
+
                     <div class="dropdown">
                         <div class="dropdown-button"><i class="fas fa-cog"></i></div>
                         <div class="dropdown-content">
@@ -223,30 +230,27 @@
         }
     });
 
-    const toggleButton = document.getElementById('toggleButton');
+    $("#dark").click(function(){
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
+
+    })
+    $("#light").click(function(){
+        document.body.classList.remove('dark-mode');
+        localStorage.removeItem('theme');
+    })
+
 
     // Função para aplicar o modo escuro baseado no localStorage
     function applyTheme() {
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
-            toggleButton.textContent = 'Desativar Modo Escuro';
         } else {
             document.body.classList.remove('dark-mode');
-            toggleButton.textContent = 'Ativar Modo Escuro';
         }
     }
 
     // Chama a função para aplicar o tema ao carregar a página
     applyTheme();
 
-    toggleButton.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        if (document.body.classList.contains('dark-mode')) {
-            localStorage.setItem('theme', 'dark');
-            toggleButton.textContent = 'Desativar Modo Escuro';
-        } else {
-            localStorage.removeItem('theme');
-            toggleButton.textContent = 'Ativar Modo Escuro';
-        }
-    });
 </script>
