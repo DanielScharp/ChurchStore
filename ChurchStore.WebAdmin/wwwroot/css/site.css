@@ -5,12 +5,14 @@
     --primary-600: #9683de;
     --primary-800: #a997e4;
     --primary-1000: #bbabea;
+    /*-----*/
     --surface: #ffffff;
     --surface-200: #DADADA;
     --surface-400: #aaaaaa;
     --surface-600: #9c9c9c;
     --surface-800: #8f8f8f;
     --surface-1000: #828282;
+    /*-----*/
     --mixed: #1a1822;
     --mixed-200: #2f2d37;
     --mixed-400: #46444d;
@@ -18,30 +20,55 @@
     --mixed-800: #76747c;
     --mixed-1000: #908f94;
     --color: #000000;
+    /*-----*/
     --table-border: #dee2e6;
+    --table-tr-odd: rgba(0, 0, 0, 0.075);
+    /*-----*/
+    --form-control-placeholder: #6c757d;
+    --form-control-color: #495057;
+    --form-control-color-focus: #495057;
+    --form-control-background: #ffffff;
+    --form-control-background-focus: #ffffff;
+    --form-control-border: #ced4da;
+    --form-control-border-focus: #80bdff;
 }
 
 .dark-mode {
+    /*-----*/
     --primary: #594acc;
     --primary-200: #6f5dd2;
     --primary-400: #8370d8;
     --primary-600: #9683de;
     --primary-800: #a997e4;
     --primary-1000: #bbabea;
+    /*-----*/
     --surface: #121212;
     --surface-200: #282828;
     --surface-400: #3f3f3f;
     --surface-600: #575757;
     --surface-800: #717171;
     --surface-1000: #8b8b8b;
+    /*-----*/
     --mixed: #1a1822;
     --mixed-200: #2f2d37;
     --mixed-400: #46444d;
     --mixed-600: #5d5b64;
     --mixed-800: #76747c;
     --mixed-1000: #908f94;
+    /*-----*/
     --color: #fff;
-    --table-border: #282828;
+    /*-----*/
+    --table-border: var(--surface-200);
+    --table-tr-odd: var(--surface-200);
+    /*-----*/
+    --form-control-placeholder: var(--surface-1000);
+    --form-control-color: var(--color);
+    --form-control-color-focus: var(--color);
+    --form-control-background: var(--surface);
+    --form-control-background-focus: var(--surface);
+    --form-control-border: var(--surface-1000);
+    --form-control-border-focus: var(--surface-200);
+    /*-----*/
 }
 
 html {
